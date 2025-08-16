@@ -1,0 +1,72 @@
+.main__info--images{
+    width: 536px;
+    height: 516px;
+    margin: 78px 48px 78px 0;
+}
+.main__info--infos{
+    width: 536px;
+    height: 672px;
+}
+.main__info{
+    margin: 112px 0;
+}
+.infos__color{
+    font-size: 15px;
+    font-weight: 400;
+}
+.infos__color .color{
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.infos__color .bgr1{
+    background-color: var(--black);
+}
+.infos__color .bgr2{
+    background-color: var(--purple);
+}
+.infos__color .bgr3{
+    background-color: var(--red);
+}
+.infos__color .bgr4{
+    background-color: var(--yellow);
+}
+.infos__color .bgr5{
+    background-color: var(--white1);
+}
+.tab-memory1{
+    width: 122px;
+    height: 48px;
+}
+.infos__text{
+    margin-bottom: 32px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.nut{
+    width: 260px;
+    height: 56px;
+    margin-bottom: 32px;
+}
+.infos__icons img{
+    width: 100%;
+    object-fit: cover;
+}
+.main__info--images{
+    cursor: pointer;
+}
+.details{
+    background-color: #FAFAFA;
+    cursor: pointer;
+}
+.details__img{
+    padding: 80px 0;
+}
+.Reviews .top{
+    margin: 88px 0 32px 0;
+}
+.Reviews .Review{
+    margin-bottom: 88px;
+}

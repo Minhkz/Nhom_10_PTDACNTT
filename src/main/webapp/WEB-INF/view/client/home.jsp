@@ -1,0 +1,511 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--css-->
+    <jsp:include page="/WEB-INF/view/client/layout/css.jsp"></jsp:include>
+    <title>My Iphone</title>
+</head>
+<body>
+<!--header-->
+<jsp:include page="/WEB-INF/view/client/layout/header.jsp"></jsp:include>
+
+<main>
+    <!-- Banner -->
+    <div class="banner1 border-top border-bottom">
+        <div class="banner1__list">
+            <div class="banner1__list--item">
+                <a href="#">
+                    <img src="${env}/client/images/home/banner/banner10.png" alt="logo">
+                </a>
+            </div>
+            <div class="banner1__list--item">
+                <a href="#">
+                    <img src="${env}/client/images/home/banner/banner9.png" alt="logo">
+                </a>
+            </div>
+            <div class="banner1__list--item">
+                <a href="#">
+                    <img src="${env}/client/images/home/banner/banner8.png" alt="logo">
+                </a>
+            </div>
+            <div class="banner1__list--item">
+                <a href="#">
+                    <img src="${env}/client/images/home/banner/banner7.png" alt="logo">
+                </a>
+            </div>
+            <div class="banner1__list--item">
+                <a href="#">
+                    <img src="${env}/client/images/home/banner/banner6.png" alt="logo">
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Main -->
+    <div class="container">
+        <div class="category">
+            <div class="category__top d-flex bd-highlight ">
+                <div class="p-2 flex-grow-1 bd-highlight category__top--title">Danh mục sản phẩm</div>
+                <div class="p-2 bd-highlight">
+                    <a href="#">
+                        <img src="${env}/client/images/home/Icon/ArrowL.png" alt="logo">
+                    </a>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <a href="#">
+                        <img src="${env}/client/images/home/Icon/ArrowR.png" alt="logo">
+                    </a>
+                </div>
+            </div>
+
+            <div class="categories d-flex justify-content-between">
+                <!-- start -->
+                <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                    <div class="category__card--icon">
+                        <a href="/client/products">
+                            <img src="${env}/client/images/home/Icon/Phones.png" alt="logo" >
+                        </a>
+                    </div>
+                    <div class="category__card--title">
+                        Phones
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                    <div class="category__card--icon">
+                        <a href="#">
+                            <img src="${env}/client/images/home/Icon/Smart Watches.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="category__card--title">
+                        Smart Watches
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                    <div class="category__card--icon">
+                        <a href="#">
+                            <img src="${env}/client/images/home/Icon/Cameras.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="category__card--title">
+                        Cameras
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                    <div class="category__card--icon">
+                        <a href="#">
+                            <img src="${env}/client/images/home/Icon/Headphones.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="category__card--title">
+                        Headphones
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                    <div class="category__card--icon">
+                        <a href="#">
+                            <img src="${env}/client/images/home/Icon/Computers.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="category__card--title">
+                        Computers
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                    <div class="category__card--icon">
+                        <a href="#">
+                            <img src="${env}/client/images/home/Icon/Gaming.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="category__card--title">
+                        Gaming
+                    </div>
+                </div>
+                <!-- end -->
+            </div>
+            <!-- Tag -->
+            <div class="tag ">
+                <ul class="d-flex">
+                    <li class="active">
+                        <a href="#">Sản phẩm mới</a>
+                    </li>
+                    <li>
+                        <a href="#"> Bán chạy</a>
+                    </li>
+                    <li>
+                        <a href="#">Sản phẩm nổi bật</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Products -->
+            <div class="products d-flex flex-wrap justify-content-between">
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/Iphone_14pro_1.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">Apple iPhone 14 Pro Max 128GB Deep Purple </div>
+                            <div class="box__details--price mt-3 mb-4">$900</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/Blackmagic_camera.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">Blackmagic Pocket Cinema Camera 6k </div>
+                            <div class="box__details--price mt-3 mb-4">$2535</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/AW_series9.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">Apple Watch Series 9 GPS 41mm Starlight Aluminium  </div>
+                            <div class="box__details--price mt-3 mb-4">$399</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/AirPost_sliver.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                AirPods Max SilverStarlight Aluminium
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$549</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/SamSung.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                Samsung Galaxy Watch6 Classic 47mm Black
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$369</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/GalaxyZ5.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                Galaxy Z Fold5 Unlocked | 256GB | Phantom Black
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$1799</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/GalaxyFE.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                Galaxy Buds FE <br>
+                                Graphite
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$99.99</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/IPad9.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                Apple iPad 9 10.2" 64GB Wi-Fi Silver (MK2L3) 2021
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$398</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+            </div>
+        </div>
+
+    </div>
+    <!-- Big banner -->
+    <div class="bigBanner d-flex justify-content-between">
+        <!-- start -->
+        <div class="bigBanner__item">
+            <div class="bigBanner__item--img">
+                <a href="#">
+                    <img src="${env}/client/images/home/products/Popular.png" alt="logo">
+                </a>
+            </div>
+            <div class="bigBanner__item--details ">
+                <div class="bigBanner__item--name">Phổ biến nhất</div>
+                <div class="bigBanner__item--describe mt-3 mb-3">iPad sở hữu màn hình Retina 10.2 inch tuyệt đẹp, hiệu năng ấn tượng, hỗ trợ đa nhiệm và cực kỳ dễ sử dụng.</div>
+                <div class="bigBanner__item--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+            </div>
+        </div>
+        <!-- end -->
+        <!-- start -->
+        <div class="bigBanner__item" id="banner2">
+            <div class="bigBanner__item--img">
+                <a href="#">
+                    <img src="${env}/client/images/home/products/IPadPro.png" alt="logo">
+                </a>
+            </div>
+            <div class="bigBanner__item--details ">
+                <div class="bigBanner__item--name">Ipad Pro</div>
+                <div class="bigBanner__item--describe mt-3 mb-3">iPad sở hữu màn hình Retina 10.2 inch tuyệt đẹp, hiệu năng ấn tượng, hỗ trợ đa nhiệm và cực kỳ dễ sử dụng.</div>
+                <div class="bigBanner__item--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+            </div>
+        </div>
+        <!-- end -->
+        <!-- start -->
+        <div class="bigBanner__item" id="banner3">
+            <div class="bigBanner__item--img">
+                <a href="#">
+                    <img src="${env}/client/images/home/products/SSGalaxy.png" alt="logo">
+                </a>
+            </div>
+            <div class="bigBanner__item--details ">
+                <div class="bigBanner__item--name">Samsung Galaxy </div>
+                <div class="bigBanner__item--describe mt-3 mb-3">iPad sở hữu màn hình Retina 10.2 inch tuyệt đẹp, hiệu năng ấn tượng, hỗ trợ đa nhiệm và cực kỳ dễ sử dụng.</div>
+                <div class="bigBanner__item--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+            </div>
+        </div>
+        <!-- end -->
+        <!-- start -->
+        <div class="bigBanner__item" id="banner4">
+            <div class="bigBanner__item--img">
+                <a href="#">
+                    <img src="${env}/client/images/home/products/Macbook .png" alt="logo">
+                </a>
+            </div>
+            <div class="bigBanner__item--details ">
+                <div class="bigBanner__item--name">Macbook Pro</div>
+                <div class="bigBanner__item--describe mt-3 mb-3">iPad sở hữu màn hình Retina 10.2 inch tuyệt đẹp, hiệu năng ấn tượng, hỗ trợ đa nhiệm và cực kỳ dễ sử dụng.</div>
+                <div class="bigBanner__item--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+            </div>
+        </div>
+        <!-- end -->
+    </div>
+    <div class="container">
+        <div class="discounts">
+            <div class="discounts__title">Ưu đãi lên đến 50%</div>
+            <div class="discounts__products d-flex justify-content-between">
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/Iphone_14pro_Gold.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                Apple iPhone 14 Pro 512GB Gold (MQ233)
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$1437</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/AirPost_sliver.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                AirPods Max Silver Starlight Aluminium
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$549</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/AW_series9.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                Apple Watch Series 9 GPS 41mm Starlight Aluminium
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$399</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="product__item">
+                    <div class="product__item--box">
+                        <div class="box__header d-flex justify-content-end">
+                            <a href="#">
+                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__img">
+                            <a href="#">
+                                <img src="${env}/client/images/home/products/Iphone_14pro_1TB_Gold.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="box__details d-flex flex-column justify-content-between align-items-center">
+                            <div class="box__details--name text-center">
+                                Apple iPhone 14 Pro 1TB Gold (MQ2V3)
+                            </div>
+                            <div class="box__details--price mt-3 mb-4">$1499</div>
+                            <div class="box__details--btn d-flex justify-content-center align-items-center">Mua ngay</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+            </div>
+        </div>
+    </div>
+    <div class="bigBanner2">
+        <div class="bigBanner2__item">
+            <a href="#">
+                <img src="${env}/client/images/home/banner/Big_Banner.png" alt="logo">
+            </a>
+        </div>
+    </div>
+</main>
+
+<!--Footer-->
+<jsp:include page="/WEB-INF/view/client/layout/footer.jsp"></jsp:include>
+
+<!--js-->
+<jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<div class=" container  d-flex  justify-content-between align-items-center header  ">
+    <div class="header__logo">
+        <a href="#">
+            <img src="${env}/client/images/logo.png" alt="logo">
+        </a>
+    </div>
+    <div class=" header__search d-flex align-items-center gap-2">
+        <a href="#" class="p-2">
+            <img src="${env}/client/images/home/Icon/Search.png" alt="logo">
+        </a>
+        <input type="text" placeholder="search..." class="header__search--input">
+    </div>
+    <div class="header__nav">
+        <ul class="d-flex gap-4 menu">
+            <li>
+                <a href="home.html">Trang chủ</a>
+            </li>
+            <li>
+                <a href="#">Giới thiệu</a>
+            </li>
+            <li>
+                <a href="#">Liên hệ</a>
+            </li>
+            <li>
+                <a href="#">Tin tức</a>
+            </li>
+        </ul>
+    </div>
+    <div class="header__icons">
+        <ul class="d-flex gap-4 menu--icons">
+            <li>
+                <a href="#">
+                    <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                </a>
+            </li>
+            <li class="icons__cart">
+                <a href="./Shopping_Cart.html">
+                    <img src="${env}/client/images/home/Icon/cart.png" alt="logo">
+                </a>
+                <div class="quantity d-flex justify-content-center align-items-center">
+                    0
+                </div>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="${env}/client/images/home/Icon/User.png" alt="logo">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
