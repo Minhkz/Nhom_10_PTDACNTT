@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderController {
     @GetMapping
     public String orderPage(){
-        return "admin/order";
+        return "admin/orders/order";
     }
 }

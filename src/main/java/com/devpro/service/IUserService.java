@@ -1,13 +1,15 @@
 package com.devpro.service;
 
-import com.devpro.dto.UserDto;
+import com.devpro.dto.user.UserViewDto;
 import com.devpro.models.User;
 
 import java.util.List;
 
 public interface IUserService {
 
-    UserDto save(User user);
+    UserViewDto save(User user);
 
-    List<UserDto> findAll();
+    List<UserViewDto> findAll();
+
+    User findById(Integer id);
 }

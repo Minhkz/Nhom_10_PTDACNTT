@@ -1,8 +1,6 @@
 package com.devpro.service.impl;
 
-import com.devpro.dto.RoleDto;
-import com.devpro.dto.UserDto;
-import com.devpro.models.Role;
+import com.devpro.dto.user.UserViewDto;
 import com.devpro.models.User;
 import com.devpro.repository.RoleRepository;
 import com.devpro.repository.UserRepository;
@@ -22,23 +20,29 @@ public class UserService implements IUserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    //save
     @Override
-    public UserDto save(User user) {
+    public UserViewDto save(User user) {
         User savedUser = userRepository.save(user);
-        return convertData(savedUser);
+        return convertUserDto(savedUser);
     }
 
+    //view
     @Override
-    public List<UserDto> findAll() {
+    public List<UserViewDto> findAll() {
         List<User> users = userRepository.findAll();
-        return users.stream().map(user -> convertData(user)).collect(Collectors.toList());
+        return users.stream().map(user -> convertUserDto(user)).collect(Collectors.toList());
     }
-    public Role getRoleByName(Role.RoleType name){
-        Role role = roleRepository.findByName(name);
-        return role;
+
+
+    @Override
+    public User findById(Integer id) {
+        return userRepository.findById(id).get();
     }
-    public UserDto convertData(User savedUser){
-        return UserDto.builder()
+
+
+    public UserViewDto convertUserDto(User savedUser){
+        return UserViewDto.builder()
                 .id(savedUser.getId())
                 .username(savedUser.getUsername())
                 .email(savedUser.getEmail())
@@ -46,14 +50,9 @@ public class UserService implements IUserService {
                 .address(savedUser.getAddress())
                 .phone(savedUser.getPhone())
                 .avatar(savedUser.getAvatar())
-                .role(savedUser.getRole().toString())
-                .createdDate(savedUser.getCreatedDate())
+                .role(savedUser.getRole().getName())
+                .createdDate(savedUser.getCreatedDate().toLocalDate())
                 .build();
     }
-    public RoleDto convertDataRole(Role role){
-        return RoleDto.builder()
-                .id(role.getId())
-                .name(role.getName())
-                .build();
-    }
+
 }

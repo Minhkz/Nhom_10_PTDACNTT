@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductAdminController {
     @GetMapping
     public String productPage(){
-        return "admin/product";
+        return "admin/products/product";
     }
 }

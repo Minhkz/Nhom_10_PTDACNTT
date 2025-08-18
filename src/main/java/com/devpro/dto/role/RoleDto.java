@@ -1,4 +1,4 @@
-package com.devpro.dto;
+package com.devpro.dto.role;
 
 
 
@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RoleDto {
     private Integer id;
-    private Role.RoleType name;
+    private String name;
+    private String description;
 
 }
