@@ -55,4 +55,8 @@ public class UserService implements IUserService {
                 .build();
     }
 
+    @Override
+    public void delete(Integer id) {
+        userRepository.deleteById(id);
+    }
 }

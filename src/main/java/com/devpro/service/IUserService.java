@@ -12,4 +12,6 @@ public interface IUserService {
     List<UserViewDto> findAll();
 
     User findById(Integer id);
+
+    void delete(Integer id);
 }
