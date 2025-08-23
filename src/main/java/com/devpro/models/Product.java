@@ -19,7 +19,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 100, nullable = false, unique = true)
+    @Column(length = 100, nullable = false)
     @NonNull
     private String name;
 
@@ -27,7 +27,7 @@ public class Product implements Serializable {
     @NonNull
     private Double price;
 
-    @Column(name = "detail_desc",nullable = false)
+    @Column(name = "detail_desc",nullable = false, columnDefinition = "MEDIUMTEXT ")
     @NonNull
     private String detailDesc;
 
@@ -39,19 +39,22 @@ public class Product implements Serializable {
     @NonNull
     private Integer quantity;
 
-    @Column(nullable = false)
-    @NonNull
+    @Column(name = "sold")
     private Integer sold;
 
-    @Column(length = 100, nullable = false, unique = true)
-    private String factory;
+    @Column(name = "image", length = 1000)
+    private String avatar;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @NonNull
     private Category category;
 
-    @OneToMany(mappedBy = "product")
-    private List<ProductImage> productImages;
+    @ManyToOne
+    @JoinColumn(name = "spec_id")
+    @NonNull
+    private Specification specification;
 
     @OneToMany(mappedBy = "product")
     private List<OrderProduct> orderProducts;
@@ -64,4 +67,11 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
+
+    @PrePersist
+    public void defaults() {
+        if(this.sold == null) {
+            this.sold = 1;
+        }
+    }
 }

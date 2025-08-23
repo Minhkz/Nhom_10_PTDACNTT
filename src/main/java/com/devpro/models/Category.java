@@ -19,35 +19,16 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Category parent;
 
-    @OneToMany(mappedBy = "parent")
-    private List<Category> children;
-
-    @Column(length = 150, nullable = false)
+    @Column(name = "trade_mark", length = 20)
     @NonNull
     private String name;
 
-    @Column(length = 200, nullable = false, unique = true)
-    @NonNull
-    private String slug;
-
-    @Column
-    private String description;
-
-    @Column(name = "sort_order")
-    @NonNull
-    private Integer sortOrder;
 
     @PrePersist
     public void defaults() {
-        if(this.parent == null) {
-            this.parent = null;
-        }
-        if (this.sortOrder == null) {
-            this.sortOrder = 0;
+        if(this.name == null) {
+            this.name = "Apple";
         }
     }
 

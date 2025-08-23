@@ -85,100 +85,6 @@
                                             class="form-check-input"
                                             type="checkbox"
                                             value=""
-                                            id="Xiaomi"
-                                    />
-                                    <label class="form-check-label items__name" for="Xiaomi">
-                                        Xiaomi
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="poco"
-                                    />
-                                    <label class="form-check-label items__name" for="poco">
-                                        Poco
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="oppo"
-                                    />
-                                    <label class="form-check-label items__name" for="oppo">
-                                        OPPO
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="honor"
-                                    />
-                                    <label class="form-check-label items__name" for="honor">
-                                        Honor
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="motorola"
-                                    />
-                                    <label
-                                            class="form-check-label items__name"
-                                            for="motorola"
-                                    >
-                                        Motorola
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="nokia"
-                                    />
-                                    <label class="form-check-label items__name" for="nokia">
-                                        Nokia
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="realme"
-                                    />
-                                    <label class="form-check-label items__name" for="realme">
-                                        Realme
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
                                             id="samsung"
                                     />
                                     <label class="form-check-label items__name" for="samsung">
@@ -416,10 +322,10 @@
                                             class="form-check-input"
                                             type="checkbox"
                                             value=""
-                                            id="nokia"
+                                            id="6.1inch"
                                     />
-                                    <label class="form-check-label items__name" for="nokia">
-                                        Nokia
+                                    <label class="form-check-label items__name" for="6.1inch">
+                                        6.1 inch
                                     </label>
                                 </div>
                                 <!-- end -->
@@ -429,10 +335,10 @@
                                             class="form-check-input"
                                             type="checkbox"
                                             value=""
-                                            id="realme"
+                                            id="6.7inch"
                                     />
-                                    <label class="form-check-label items__name" for="realme">
-                                        Realme
+                                    <label class="form-check-label items__name" for="6.7inch">
+                                        6.7 inch
                                     </label>
                                 </div>
                                 <!-- end -->
@@ -442,10 +348,10 @@
                                             class="form-check-input"
                                             type="checkbox"
                                             value=""
-                                            id="samsung"
+                                            id="5.8inch"
                                     />
-                                    <label class="form-check-label items__name" for="samsung">
-                                        Samsung
+                                    <label class="form-check-label items__name" for="5.8inch">
+                                        Dưới 5.8 inch
                                     </label>
                                 </div>
                                 <!-- end -->
