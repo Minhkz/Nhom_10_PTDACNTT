@@ -11,13 +11,19 @@ import com.devpro.service.impl.CategoryService;
 import com.devpro.service.impl.ProductService;
 import com.devpro.service.impl.SpeService;
 import com.devpro.service.impl.UploadService;
+import com.devpro.service.specification.ProductSpec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -36,8 +42,25 @@ public class ProductAdminController {
     private SpeService speService;
 
     @GetMapping
-    public String productPage(Model model) {
-        List<ProductDto> productDtos =  productService.findAll();
+    public String productPage(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+                              @RequestParam(name = "name", required = false)String name) {
+        Pageable pageable = PageRequest.of(page-1, 5,  Sort.by("id").descending());
+
+        Page<Product> productPage;
+        if(name==null||name.isEmpty()){
+            productPage  = productService.findAll(pageable);
+        }else {
+            productPage = productService.findAll(ProductSpec.searchByName(name), pageable);
+            model.addAttribute("nameSearch", name);
+        }
+
+
+        List<ProductDto> productDtos = productPage.getContent().stream().map(product -> productService.convertProduct(product)).collect(Collectors.toList());
+        int totalPages = productPage.getTotalPages();
+
+
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", page);
         model.addAttribute("products", productDtos);
         return "admin/products/product";
     }
@@ -59,6 +82,8 @@ public class ProductAdminController {
         product.setDetailDesc(createProductDto.getDetailDesc());
         product.setShortDesc(createProductDto.getShortDesc());
         product.setQuantity(createProductDto.getQuantity());
+        product.setFeatured(createProductDto.getFeatured());
+        product.setDiscount(createProductDto.getDiscount());
 
         Category  category = categoryService.findById(createProductDto.getCategoryId());
         product.setCategory(category);
@@ -104,6 +129,8 @@ public class ProductAdminController {
         updateProductDto.setName(product.getName());
         updateProductDto.setQuantity(product.getQuantity());
         updateProductDto.setDetailDesc(product.getDetailDesc());
+        updateProductDto.setDiscount(product.getDiscount());
+        updateProductDto.setFeatured(product.getFeatured());
         model.addAttribute("updateProduct", updateProductDto);
         return "admin/products/update";
     }
@@ -117,6 +144,8 @@ public class ProductAdminController {
         product.setDetailDesc(updateProductDto.getDetailDesc());
         product.setShortDesc(updateProductDto.getShortDesc());
         product.setQuantity(updateProductDto.getQuantity());
+        product.setFeatured(updateProductDto.getFeatured());
+        product.setDiscount(updateProductDto.getDiscount());
         productService.save(product);
         return "redirect:/admin/products";
     }

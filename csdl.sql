@@ -37,7 +37,7 @@ CREATE TABLE specifications (
     screen_type 	VARCHAR(100) NOT NULL,
     screen_size 	FLOAT DEFAULT 6.1,
     protection 		CHAR(4) DEFAULT "IP67",
-    ram 			TINYINT NOT NULL
+    rom 			SMALLINT NOT NULL
 );
 
 
@@ -51,7 +51,9 @@ CREATE TABLE products(
     quantity 		INT NOT NULL,
     sold 			INT DEFAULT 1,
     image 			VARCHAR(1000),
-
+	is_featured 	BIT(1) DEFAULT 0,
+    is_discount		BIT(1) DEFAULT 0,
+    
     category_id 	INT NOT NULL,
     spec_id 		INT NOT NULL,
 

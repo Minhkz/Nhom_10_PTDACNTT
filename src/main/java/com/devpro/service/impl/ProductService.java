@@ -5,6 +5,9 @@ import com.devpro.models.Product;
 import com.devpro.repository.ProductRepository;
 import com.devpro.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +25,15 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<ProductDto> findAll() {
-        List<Product> products = productRepository.findAll();
-        return products.stream().map(product -> convertProduct(product)).collect(Collectors.toList());
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Product> findAll(Specification<Product> spec, Pageable pageable) {
+        return productRepository.findAll(spec, pageable);
+    }
+
 
     @Override
     public Product findById(int id) {

@@ -74,7 +74,20 @@
                                         <form:option value="2">SamSung</form:option>
                                     </form:select>
                                 </div>
-
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label">Sản phẩm nổi bật:</label>
+                                    <form:select class="form-select" path="featured">
+                                        <form:option value="1">Có</form:option>
+                                        <form:option value="0">Không</form:option>
+                                    </form:select>
+                                </div>
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label">Sản phẩm giảm giá:</label>
+                                    <form:select class="form-select" path="discount">
+                                        <form:option value="1">Có</form:option>
+                                        <form:option value="0">Không</form:option>
+                                    </form:select>
+                                </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label">Color:</label>
                                     <form:input type="text" class="form-control" path="color" />
@@ -115,10 +128,10 @@
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label">Category:</label>
                                     <form:select class="form-select" path="ram">
-                                        <form:option value="4">4GB</form:option>
-                                        <form:option value="8">8GB</form:option>
-                                        <form:option value="16">16GB</form:option>
-                                        <form:option value="32">32GB</form:option>
+                                        <form:option value="64">64GB</form:option>
+                                        <form:option value="1288">128GB</form:option>
+                                        <form:option value="256">256GB</form:option>
+                                        <form:option value="1000">1TB</form:option>
                                     </form:select>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">

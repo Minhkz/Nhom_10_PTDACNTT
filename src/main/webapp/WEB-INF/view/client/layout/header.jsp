@@ -10,7 +10,7 @@
         <a href="#" class="p-2">
             <img src="${env}/client/images/home/Icon/Search.png" alt="logo">
         </a>
-        <input type="text" placeholder="search..." class="header__search--input">
+        <input type="text" placeholder="Search..." class="header__search--input">
     </div>
     <div class="header__nav">
         <ul class="d-flex gap-4 menu">

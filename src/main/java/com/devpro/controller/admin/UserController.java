@@ -8,14 +8,22 @@ import com.devpro.models.User;
 import com.devpro.service.impl.RoleService;
 import com.devpro.service.impl.UploadService;
 import com.devpro.service.impl.UserService;
+import com.devpro.service.specification.UserSpec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/users")
@@ -34,9 +42,24 @@ public class UserController {
     private RoleService roleService;
 
     @GetMapping
-    public String userPage(Model model) {
-        List<UserViewDto> users = userService.findAll();
+    public String userPage(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+                                                      @RequestParam(value = "name", required = false) String name)
+    {
+
+        Pageable pageable = PageRequest.of(page-1, 5, Sort.by("id").descending());
+        Page<User> userPages;
+        if (name != null && !name.isEmpty()) {
+            userPages= userService.findAll(UserSpec.searchUserByName(name),pageable);
+            model.addAttribute("nameSearch", name);
+        }else {
+            userPages= userService.findAll(pageable);
+        }
+        List<User> userList = userPages.getContent();
+        List<UserViewDto> users = userList.stream().map(user -> userService.convertUserDto(user)).collect(Collectors.toList());
+
         model.addAttribute("users", users);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", userPages.getTotalPages());
         return "admin/users/user";
     }
 
@@ -68,12 +91,17 @@ public class UserController {
     }
     @GetMapping("/views/{id}")
     public String viewsPage(@PathVariable("id") int id, Model model) {
-        List<UserViewDto> users = userService.findAll();
-        UserViewDto userViewDto = users.stream()
-                .filter(user -> user.getId() == id)
-                .findFirst()
-                .orElse(null);
-
+        User user = userService.findById(id);
+        UserViewDto userViewDto = new UserViewDto();
+        userViewDto.setId(user.getId());
+        userViewDto.setUsername(user.getUsername());
+        userViewDto.setAvatar(user.getAvatar());
+        userViewDto.setEmail(user.getEmail());
+        userViewDto.setAddress(user.getAddress());
+        userViewDto.setPhone(user.getPhone());
+        userViewDto.setFullName(user.getFullName());
+        userViewDto.setRole(user.getRole().getName());
+        userViewDto.setCreatedDate(user.getCreatedDate().toLocalDate());
         model.addAttribute("user", userViewDto);
         return "admin/users/view";
     }

@@ -16,4 +16,6 @@ public class UpdateProductDto {
     private String detailDesc;
     private Integer quantity;
     private String avatar;
+    private Integer featured;
+    private Integer discount;
 }

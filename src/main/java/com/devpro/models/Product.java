@@ -45,6 +45,12 @@ public class Product implements Serializable {
     @Column(name = "image", length = 1000)
     private String avatar;
 
+    @Column(name = "is_featured")
+    private Integer featured;
+
+    @Column(name = "is_discount")
+    private Integer discount;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -72,6 +78,12 @@ public class Product implements Serializable {
     public void defaults() {
         if(this.sold == null) {
             this.sold = 1;
+        }
+        if(this.featured == null) {
+            this.featured = 0;
+        }
+        if(this.discount == null) {
+            this.discount = 0;
         }
     }
 }

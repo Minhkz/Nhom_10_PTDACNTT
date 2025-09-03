@@ -17,4 +17,5 @@ public class ProductDto {
     private String shortDesc;
     private Integer quantity;
     private Integer sold;
+
 }

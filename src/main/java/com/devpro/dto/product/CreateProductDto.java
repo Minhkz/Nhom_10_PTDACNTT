@@ -22,4 +22,6 @@ public class CreateProductDto {
     private Double screenSize;
     private String protection;
     private Integer ram;
+    private Integer featured;
+    private Integer discount;
 }

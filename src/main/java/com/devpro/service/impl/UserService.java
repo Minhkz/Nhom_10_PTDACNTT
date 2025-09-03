@@ -6,6 +6,10 @@ import com.devpro.repository.RoleRepository;
 import com.devpro.repository.UserRepository;
 import com.devpro.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 
@@ -29,9 +33,13 @@ public class UserService implements IUserService {
 
     //view
     @Override
-    public List<UserViewDto> findAll() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map(user -> convertUserDto(user)).collect(Collectors.toList());
+    public Page<User> findAll(Pageable page) {
+        return userRepository.findAll(page);
+    }
+
+    @Override
+    public Page<User> findAll(Specification<User> spec, Pageable pageable) {
+        return userRepository.findAll(spec, pageable);
     }
 
 

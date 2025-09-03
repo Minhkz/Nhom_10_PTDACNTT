@@ -13,7 +13,21 @@
     <title>Product</title>
     <!--css-->
     <jsp:include page="/WEB-INF/view/admin/layout/css.jsp"></jsp:include>
-
+    <style>
+        /* Header */
+        .header__search{
+            width: 372px;
+            height: 56px;
+            background-color: var(--bgr-search);
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+        .header__search--input{
+            border: 0;
+            outline: none;
+            background-color: transparent;
+        }
+    </style>
 </head>
 <body class="sb-nav-fixed">
 <!--header-->
@@ -32,8 +46,16 @@
                 </ol>
                 <div class="row">
                     <div class="col-12 mx-auto">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <h3>Table users</h3>
+                            <div class=" header__search d-flex align-items-center gap-2">
+                                <form action="/admin/products" method="get">
+                                    <label for="search" class="p-2">
+                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo">
+                                    </label>
+                                    <input type="text" placeholder="Search by Product Name" name="name" class="header__search--input" id="search" value="${nameSearch}">
+                                </form>
+                            </div>
                             <a href="/admin/products/creates" class="btn btn-primary">Create a product</a>
                         </div>
 
@@ -44,7 +66,6 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>Short Description</th>
                                 <th>Quantity</th>
                                 <th>Sold</th>
                                 <th>Action</th>
@@ -57,7 +78,6 @@
                                     <th>${product.id}</th>
                                     <td>${product.name}</td>
                                     <td>$${product.price}</td>
-                                    <td>${product.shortDesc}</td>
                                     <td>${product.quantity}</td>
                                     <td>${product.sold}</td>
                                     <td>
@@ -76,7 +96,29 @@
                     </div>
 
                 </div>
+                <div class="paging d-flex justify-content-center align-items-center ">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination ">
+                            <li class="page-item">
+                                <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/admin/products?page=${currentPage -1}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <c:forEach begin="0" end="${totalPages -1}" varStatus="pageNum">
+                                <li class="page-item">
+                                    <a class="${(pageNum.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
+                                       href="/admin/products?page=${pageNum.index + 1}">${pageNum.index + 1}</a>
+                                </li>
+                            </c:forEach>
 
+                            <li class="page-item">
+                                <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/admin/products?page=${currentPage +1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </main>
         <!--footer-->

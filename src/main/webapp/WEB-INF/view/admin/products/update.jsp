@@ -70,16 +70,30 @@
                                     <label class="form-label">Quantity:</label>
                                     <form:input type="number" class="form-control" path="quantity" />
                                 </div>
-
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label for="avatarFile" class="form-label">New Image:</label>
-                                    <input class="form-control" type="file" id="avatarFile"
-                                           accept=".png, .jpg, .jpeg" name="nhatminhFile" />
+                                    <label class="form-label">Sản phẩm nổi bật:</label>
+                                    <form:select class="form-select" path="featured">
+                                        <form:option value="1">Có</form:option>
+                                        <form:option value="0">Không</form:option>
+                                    </form:select>
+                                </div>
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label class="form-label">Sản phẩm giảm giá:</label>
+                                    <form:select class="form-select" path="discount">
+                                        <form:option value="1">Có</form:option>
+                                        <form:option value="0">Không</form:option>
+                                    </form:select>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label for="">Old Image:</label><br>
                                     <img src="<c:url value='/resources/admin/images/product/${updateProduct.avatar}'/>" alt="" width="100" height="100" />
                                 </div>
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label for="avatarFile" class="form-label">New Image:</label>
+                                    <input class="form-control" type="file" id="avatarFile"
+                                           accept=".png, .jpg, .jpeg" name="nhatminhFile" />
+                                </div>
+
                                 <div class="col-12 mb-3">
                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
                                          id="avatarPreview" />

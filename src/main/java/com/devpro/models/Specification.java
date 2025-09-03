@@ -39,7 +39,7 @@ public class Specification implements Serializable {
     @NonNull
     private String protection;
 
-    @Column(name = "ram", nullable = false)
+    @Column(name = "rom", nullable = false)
     @NonNull
     private Integer ram;
 
