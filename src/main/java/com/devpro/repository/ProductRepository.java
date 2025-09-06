@@ -8,9 +8,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);
+
+    List<Product> findAll(Specification<Product> specification);
 }

@@ -129,8 +129,9 @@
                                     <label class="form-label">Category:</label>
                                     <form:select class="form-select" path="ram">
                                         <form:option value="64">64GB</form:option>
-                                        <form:option value="1288">128GB</form:option>
+                                        <form:option value="128">128GB</form:option>
                                         <form:option value="256">256GB</form:option>
+                                        <form:option value="512">512GB</form:option>
                                         <form:option value="1000">1TB</form:option>
                                     </form:select>
                                 </div>

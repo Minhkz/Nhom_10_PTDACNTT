@@ -15,6 +15,8 @@ public interface IProductService {
 
     Page<Product> findAll(Specification<Product> spec, Pageable pageable);
 
+    List<Product> findAll(Specification<Product> spec);
+
     Product findById(int id);
 
     void deleteProductById(int id);
