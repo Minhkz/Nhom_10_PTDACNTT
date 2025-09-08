@@ -21,6 +21,15 @@
                 $("#avatarPreview").attr("src", imgURL);
                 $("#avatarPreview").css({ "display": "block" });
             });
+
+
+            // Image preview
+            const imageFile = $("#imageFile");
+            imageFile.change(function (e) {
+                const imgURL = URL.createObjectURL(e.target.files[0]);
+                $("#imagePreview").attr("src", imgURL);
+                $("#imagePreview").css({ "display": "block" });
+            });
         });
     </script>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -85,11 +94,11 @@
                                     </form:select>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label for="">Old Image:</label><br>
+                                    <label for="">Old avatar:</label><br>
                                     <img src="<c:url value='/resources/admin/images/product/${updateProduct.avatar}'/>" alt="" width="100" height="100" />
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label for="avatarFile" class="form-label">New Image:</label>
+                                    <label for="avatarFile" class="form-label">New avatar:</label>
                                     <input class="form-control" type="file" id="avatarFile"
                                            accept=".png, .jpg, .jpeg" name="nhatminhFile" />
                                 </div>
@@ -98,6 +107,21 @@
                                     <img style="max-height: 250px; display: none;" alt="avatar preview"
                                          id="avatarPreview" />
                                 </div>
+
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label for="">Old Image:</label><br>
+                                    <img src="<c:url value='/resources/admin/images/product_details/${updateProduct.img}'/>" alt="" width="100" height="100" />
+                                </div>
+                                <div class="mb-3 col-12 col-md-6">
+                                    <label for="imageFile" class="form-label">Image:</label>
+                                    <input class="form-control" type="file" id="imageFile"
+                                           accept=".png, .jpg, .jpeg" name="nhatminhImgFile" />
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                         id="imagePreview" />
+                                </div>
+
                                 <div class="col-12 mb-5">
                                     <button type="submit" class="btn btn-warning">Update</button>
                                 </div>

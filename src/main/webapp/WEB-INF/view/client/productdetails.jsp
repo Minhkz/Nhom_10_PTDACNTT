@@ -39,7 +39,7 @@
         <!-- Main -->
         <div class="row">
             <div class="col-md-12 col-lg-6 g-2 main__left">
-                <img src="${env}/admin/images/product/${productd.avatar}" alt="logo" width="414px">
+                <img src="${env}/admin/images/product_details/${productd.img}" alt="logo" width="414px">
             </div>
             <div class="col-md-12 col-lg-6 g-2 main__right">
                 <div class="name m-2">

@@ -1,6 +1,7 @@
 package com.devpro.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class Product implements Serializable {
 
     @Column(nullable = false)
     @NonNull
+    @Min(1)
     private Integer quantity;
 
     @Column(name = "sold")
@@ -50,6 +52,9 @@ public class Product implements Serializable {
 
     @Column(name = "is_discount")
     private Integer discount;
+
+    @Column(name = "image_detail", length = 1000)
+    private String img;
 
 
     @ManyToOne
@@ -77,7 +82,7 @@ public class Product implements Serializable {
     @PrePersist
     public void defaults() {
         if(this.sold == null) {
-            this.sold = 1;
+            this.sold = 0;
         }
         if(this.featured == null) {
             this.featured = 0;

@@ -85,7 +85,7 @@
                                         <a href="/admin/products/updates/${product.id}"
                                            class="btn btn-warning  mx-2">Update</a>
                                         <a href="/admin/products/deletes/${product.id}"
-                                           class="btn btn-danger">Delete</a>
+                                           class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                                     </td>
                                 </tr>
 

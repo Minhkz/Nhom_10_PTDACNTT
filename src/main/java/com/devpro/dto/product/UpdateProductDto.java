@@ -18,4 +18,5 @@ public class UpdateProductDto {
     private String avatar;
     private Integer featured;
     private Integer discount;
+    private String img;
 }

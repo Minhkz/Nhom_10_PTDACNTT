@@ -56,7 +56,8 @@ CREATE TABLE products(
     
     category_id 	INT NOT NULL,
     spec_id 		INT NOT NULL,
-
+	
+    image_detail   VARCHAR(1000), 
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
     FOREIGN KEY (spec_id) REFERENCES specifications(id) ON DELETE CASCADE
 );

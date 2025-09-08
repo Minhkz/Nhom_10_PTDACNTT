@@ -19,6 +19,9 @@ public class UploadService implements IUploadService {
 
     @Override
     public String handleSaveUploadFile(String nameFile, MultipartFile file) {
+        if (file.isEmpty()) {
+            return "";
+        }
         String rootPath = this.servletContext.getRealPath("/resources/admin/images");
         String finalName="";
         try {

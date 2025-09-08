@@ -1,6 +1,8 @@
 package com.devpro.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.io.Serializable;
@@ -26,10 +28,12 @@ public class User implements Serializable {
 
     @Column(name = "email", unique = true, nullable = false, length = 100 )
     @NonNull
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
     @Column(name = "password", nullable = false)
     @NonNull
+    @Size(min = 6)
     private String password;
 
     @Column(name = "full_name", nullable = false, length = 100 )
@@ -42,6 +46,7 @@ public class User implements Serializable {
 
     @Column(name = "phone", unique = true, nullable = false, length = 15)
     @NonNull
+    @Size(min = 10)
     private String phone;
 
     @Column(name = "avatar", nullable = true, length = 1000)

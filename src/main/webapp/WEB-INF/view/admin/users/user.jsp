@@ -84,7 +84,7 @@
                                         <a href="/admin/users/updates/${user.id}"
                                            class="btn btn-warning  mx-2">Update</a>
                                         <a href="/admin/users/deletes/${user.id}"
-                                           class="btn btn-danger">Delete</a>
+                                           class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                                     </td>
                                 </tr>
 

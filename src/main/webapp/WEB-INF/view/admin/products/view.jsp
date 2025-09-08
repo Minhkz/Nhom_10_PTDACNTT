@@ -35,20 +35,20 @@
                     <tr>
                         <td rowspan="5"><img src="/admin/images/product/${product.avatar}" /></td>
                         <td>
-                            Name: ${product.name}
+                            <strong>Name</strong>: ${product.name}
                         </td>
                     </tr>
                     <tr>
-                        <td>Price: ${product.price}</td>
+                        <td><strong>Price</strong>: ${product.price}</td>
                     </tr>
                     <tr>
-                        <td>Detail description: ${product.shortDesc}</td>
+                        <td><strong>Description</strong>: ${product.shortDesc}</td>
                     </tr>
                     <tr>
-                        <td>Quantity: ${product.quantity}</td>
+                        <td><strong>Quantity</strong>: ${product.quantity}</td>
                     </tr>
                     <tr>
-                        <td>Sold: ${product.sold}</td>
+                        <td><strong>Sold</strong>: ${product.sold}</td>
                     </tr>
                 </table>
 
