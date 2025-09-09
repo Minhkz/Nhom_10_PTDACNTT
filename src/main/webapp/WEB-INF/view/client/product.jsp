@@ -32,8 +32,8 @@
         <div class="main d-flex">
             <div class="d-none d-lg-block lefmenu">
                 <div class="accordion" id="accordionPanelsStayOpenExample">
-                    <!-- start -->
-                    <div class="accordion-item left__item">
+                    <!-- start Trade mark-->
+                    <div class="accordion-item left__item tradeMarkFilter">
                         <h2 class="accordion-header" id="panelsStayOpen-headingBrand">
                             <button
                                     class="accordion-button collapsed"
@@ -54,26 +54,15 @@
                         >
                             <div class="accordion-body">
                                 <!-- body -->
-                                <div
-                                        class="leftmenu__search d-flex align-items-center gap-2"
-                                >
-                                    <a href="#" class="p-2">
-                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo" />
-                                    </a>
-                                    <input
-                                            type="text"
-                                            placeholder="search..."
-                                            class="header__search--input"
-                                    />
-                                </div>
+
                                 <!-- start -->
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
+                                            value="apple"
                                             id="apple"
-                                            checked
+                                            name="trade_mark"
                                     />
                                     <label class="form-check-label items__name" for="apple">
                                         Apple
@@ -85,8 +74,9 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
+                                            value="samsung"
                                             id="samsung"
+                                            name="trade_mark"
                                     />
                                     <label class="form-check-label items__name" for="samsung">
                                         Samsung
@@ -97,191 +87,8 @@
                         </div>
                     </div>
                     <!-- end -->
-                    <!-- start -->
-                    <div class="accordion-item left__item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingPin">
-                            <button
-                                    class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapsePin"
-                                    aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapsePin"
-                                    style="font-family: Inter"
-                            >
-                                Dung lượng pin
-                            </button>
-                        </h2>
-                        <div
-                                id="panelsStayOpen-collapsePin"
-                                class="accordion-collapse collapse"
-                                aria-labelledby="panelsStayOpen-headingPin"
-                        >
-                            <div class="accordion-body">
-                                <!-- body -->
-                                <div
-                                        class="leftmenu__search d-flex align-items-center gap-2"
-                                >
-                                    <a href="#" class="p-2">
-                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo" />
-                                    </a>
-                                    <input
-                                            type="text"
-                                            placeholder="search..."
-                                            class="header__search--input"
-                                    />
-                                </div>
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="3000mAh"
-                                    />
-                                    <label class="form-check-label items__name" for="3000mAh">
-                                        3000mAh
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="4000mAh"
-                                    />
-                                    <label class="form-check-label items__name" for="4000mAh">
-                                        4000mAh
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="5000mAh"
-                                    />
-                                    <label class="form-check-label items__name" for="5000mAh">
-                                        5000mAh
-                                    </label>
-                                </div>
-                                <!-- end -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end -->
-                    <!-- start -->
-                    <div class="accordion-item left__item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingScreen">
-                            <button
-                                    class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseScreen"
-                                    aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseScreen"
-                                    style="font-family: Inter"
-                            >
-                                Loại màn hình
-                            </button>
-                        </h2>
-                        <div
-                                id="panelsStayOpen-collapseScreen"
-                                class="accordion-collapse collapse"
-                                aria-labelledby="panelsStayOpen-headingScreen"
-                        >
-                            <div class="accordion-body">
-                                <!-- body -->
-                                <div
-                                        class="leftmenu__search d-flex align-items-center gap-2"
-                                >
-                                    <a href="#" class="p-2">
-                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo" />
-                                    </a>
-                                    <input
-                                            type="text"
-                                            placeholder="search..."
-                                            class="header__search--input"
-                                    />
-                                </div>
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="AMOLED"
-                                    />
-                                    <label class="form-check-label items__name" for="AMOLED">
-                                        AMOLED
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id=" IPS Quantum"
-                                    />
-                                    <label
-                                            class="form-check-label items__name"
-                                            for=" IPS Quantum"
-                                    >
-                                        IPS Quantum
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="Super LCD"
-                                    />
-                                    <label class="form-check-label items__name" for="Super LCD">
-                                        Super LCD
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="LED-backlit IPS LCD"
-                                    />
-                                    <label class="form-check-label items__name" for="LED-backlit IPS LCD">
-                                        LED-backlit IPS LCD
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value=""
-                                            id="ClearBlack"
-                                    />
-                                    <label class="form-check-label items__name" for="ClearBlack">
-                                        ClearBlack
-                                    </label>
-                                </div>
-                                <!-- end -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end -->
-                    <!-- start -->
-                    <div class="accordion-item left__item">
+                    <!-- start Screen size-->
+                    <div class="accordion-item left__item screenSizeFilter">
                         <h2
                                 class="accordion-header"
                                 id="panelsStayOpen-headingDiagonal"
@@ -305,25 +112,14 @@
                         >
                             <div class="accordion-body">
                                 <!-- body -->
-                                <div
-                                        class="leftmenu__search d-flex align-items-center gap-2"
-                                >
-                                    <a href="#" class="p-2">
-                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo" />
-                                    </a>
-                                    <input
-                                            type="text"
-                                            placeholder="search..."
-                                            class="header__search--input"
-                                    />
-                                </div>
                                 <!-- start -->
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
+                                            value="6.1"
                                             id="6.1inch"
+                                            name="size"
                                     />
                                     <label class="form-check-label items__name" for="6.1inch">
                                         6.1 inch
@@ -335,8 +131,9 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
+                                            value="6.7"
                                             id="6.7inch"
+                                            name="size"
                                     />
                                     <label class="form-check-label items__name" for="6.7inch">
                                         6.7 inch
@@ -348,8 +145,9 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
+                                            value="5.8"
                                             id="5.8inch"
+                                            name="size"
                                     />
                                     <label class="form-check-label items__name" for="5.8inch">
                                         Dưới 5.8 inch
@@ -360,53 +158,42 @@
                         </div>
                     </div>
                     <!-- end -->
-                    <!-- start -->
-                    <div class="accordion-item left__item">
+                    <!-- start Color-->
+                    <div class="accordion-item left__item colorFilter">
                         <h2
                                 class="accordion-header"
-                                id="panelsStayOpen-headingProtection"
+                                id="panelsStayOpen-headingColor"
                         >
                             <button
                                     class="accordion-button collapsed"
                                     type="button"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseProtection"
+                                    data-bs-target="#panelsStayOpen-collapseColor"
                                     aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseProtection"
+                                    aria-controls="panelsStayOpen-collapseColor"
                                     style="font-family: Inter"
                             >
-                                Chuẩn bảo vệ
+                                Màu sắc
                             </button>
                         </h2>
                         <div
-                                id="panelsStayOpen-collapseProtection"
+                                id="panelsStayOpen-collapseColor"
                                 class="accordion-collapse collapse"
-                                aria-labelledby="panelsStayOpen-headingProtection"
+                                aria-labelledby="panelsStayOpen-headingColor"
                         >
                             <div class="accordion-body">
                                 <!-- body -->
-                                <div
-                                        class="leftmenu__search d-flex align-items-center gap-2"
-                                >
-                                    <a href="#" class="p-2">
-                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo" />
-                                    </a>
-                                    <input
-                                            type="text"
-                                            placeholder="search..."
-                                            class="header__search--input"
-                                    />
-                                </div>
                                 <!-- start -->
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
-                                            id="IP67"
+                                            value="Deep Purple"
+                                            id="DeepPurple"
+                                            name="color"
                                     />
-                                    <label class="form-check-label items__name" for="IP67">
-                                        IP67
+                                    <label class="form-check-label items__name" for="DeepPurple">
+                                        Deep Purple
                                     </label>
                                 </div>
                                 <!-- end -->
@@ -415,11 +202,110 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
-                                            id="IP68"
+                                            value="Blackmagic"
+                                            id="Blackmagic"
+                                            name="color"
                                     />
-                                    <label class="form-check-label items__name" for="IP68">
-                                        IP68
+                                    <label class="form-check-label items__name" for="Blackmagic">
+                                        Blackmagic
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="Silver"
+                                            id="Silver"
+                                            name="color"
+                                    />
+                                    <label class="form-check-label items__name" for="Silver">
+                                        Silver
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="Black"
+                                            id="Black"
+                                            name="color"
+                                    />
+                                    <label class="form-check-label items__name" for="Black">
+                                        Black
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="Phantom Black"
+                                            id="Phantom Black"
+                                            name="color"
+                                    />
+                                    <label class="form-check-label items__name" for="Phantom Black">
+                                        Phantom Black
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="Gold"
+                                            id="Gold"
+                                            name="color"
+                                    />
+                                    <label class="form-check-label items__name" for="Gold">
+                                        Gold
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="White"
+                                            id="White"
+                                            name="color"
+                                    />
+                                    <label class="form-check-label items__name" for="White">
+                                        White
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="Pink"
+                                            id="Pink"
+                                            name="color"
+                                    />
+                                    <label class="form-check-label items__name" for="Pink">
+                                        Pink
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="Space Black"
+                                            id="Space Black"
+                                            name="color"
+                                    />
+                                    <label class="form-check-label items__name" for="Space Black">
+                                        Space Black
                                     </label>
                                 </div>
                                 <!-- end -->
@@ -427,8 +313,8 @@
                         </div>
                     </div>
                     <!-- end -->
-                    <!-- start -->
-                    <div class="accordion-item left__item">
+                    <!-- start Rom-->
+                    <div class="accordion-item left__item romFilter">
                         <h2 class="accordion-header" id="panelsStayOpen-headingMemory">
                             <button
                                     class="accordion-button collapsed"
@@ -439,7 +325,7 @@
                                     aria-controls="panelsStayOpen-collapseMemory"
                                     style="font-family: Inter"
                             >
-                                Ram
+                                Rom
                             </button>
                         </h2>
                         <div
@@ -449,29 +335,19 @@
                         >
                             <div class="accordion-body">
                                 <!-- body -->
-                                <div
-                                        class="leftmenu__search d-flex align-items-center gap-2"
-                                >
-                                    <a href="#" class="p-2">
-                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo" />
-                                    </a>
-                                    <input
-                                            type="text"
-                                            placeholder="search..."
-                                            class="header__search--input"
-                                    />
-                                </div>
                                 <!-- start -->
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
-                                            id="64GB"
+                                            value="64"
+                                            id="64"
+                                            name="rom"
+
                                     />
                                     <label
                                             class="form-check-label items__name"
-                                            for="64GB"
+                                            for="64"
                                     >
                                         64GB
                                     </label>
@@ -482,10 +358,11 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
-                                            id="128GB"
+                                            value="128"
+                                            id="128"
+                                            name="rom"
                                     />
-                                    <label class="form-check-label items__name" for="128GB">
+                                    <label class="form-check-label items__name" for="128">
                                         128GB
                                     </label>
                                 </div>
@@ -495,10 +372,11 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
-                                            id="256GB"
+                                            value="256"
+                                            id="256"
+                                            name="rom"
                                     />
-                                    <label class="form-check-label items__name" for="256GB">
+                                    <label class="form-check-label items__name" for="256">
                                         256GB
                                     </label>
                                 </div>
@@ -508,10 +386,11 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
-                                            id="512GB"
+                                            value="512"
+                                            id="512"
+                                            name="rom"
                                     />
-                                    <label class="form-check-label items__name" for="512GB">
+                                    <label class="form-check-label items__name" for="512">
                                         512GB
                                     </label>
                                 </div>
@@ -521,11 +400,12 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
-                                            id="1T"
+                                            value="1000"
+                                            id="1"
+                                            name="rom"
                                     />
-                                    <label class="form-check-label items__name" for="1T">
-                                        1T
+                                    <label class="form-check-label items__name" for="1">
+                                        1TB
                                     </label>
                                 </div>
                                 <!-- end -->
@@ -533,8 +413,8 @@
                         </div>
                     </div>
                     <!-- end -->
-                    <!-- start -->
-                    <div class="accordion-item left__item">
+                    <!-- start Price-->
+                    <div class="accordion-item left__item priceFilter">
                         <h2 class="accordion-header" id="panelsStayOpen-headingPrice">
                             <button
                                     class="accordion-button collapsed"
@@ -555,31 +435,21 @@
                         >
                             <div class="accordion-body">
                                 <!-- body -->
-                                <div
-                                        class="leftmenu__search d-flex align-items-center gap-2"
-                                >
-                                    <a href="#" class="p-2">
-                                        <img src="${env}/client/images/home/Icon/Search.png" alt="logo" />
-                                    </a>
-                                    <input
-                                            type="text"
-                                            placeholder="search..."
-                                            class="header__search--input"
-                                    />
-                                </div>
+
                                 <!-- start -->
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
+                                            value="100-500"
                                             id="500"
+                                            name="price"
                                     />
                                     <label
                                             class="form-check-label items__name"
                                             for="500"
                                     >
-                                        Dưới $500
+                                        Từ $100 -> $500
                                     </label>
                                 </div>
                                 <!-- end -->
@@ -588,11 +458,26 @@
                                     <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            value=""
+                                            value="500-100"
                                             id="501"
+                                            name="price"
                                     />
                                     <label class="form-check-label items__name" for="501">
-                                        Trên $500
+                                        Từ $500 -> $1000
+                                    </label>
+                                </div>
+                                <!-- end -->
+                                <!-- start -->
+                                <div class="form-check">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="1000"
+                                            id="1001"
+                                            name="price"
+                                    />
+                                    <label class="form-check-label items__name" for="1001">
+                                        Hơn $1000
                                     </label>
                                 </div>
                                 <!-- end -->
@@ -742,5 +627,6 @@
 
 <!--js-->
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
+<script src="${env}/client/js/main.js"></script>
 </body>
 </html>

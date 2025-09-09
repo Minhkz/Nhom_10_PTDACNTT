@@ -9,10 +9,10 @@
 /* Left menu */
 .lefmenu{
     width: 256px;
-    height: 760px; 
-    margin-right: 32px; 
+    height: 760px;
+    margin-right: 32px;
     position: relative;
-    z-index: 1; 
+    z-index: 1;
 }
 .left__item{
     font-size: 18px;
@@ -27,7 +27,7 @@
     background-color: var(--bgr-search);
     border-radius: 10px;
     margin: 16px 0;
-    
+
 }
 .leftmenu__search--input{
     border: 0;
