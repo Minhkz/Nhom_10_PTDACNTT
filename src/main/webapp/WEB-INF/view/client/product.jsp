@@ -87,77 +87,6 @@
                         </div>
                     </div>
                     <!-- end -->
-                    <!-- start Screen size-->
-                    <div class="accordion-item left__item screenSizeFilter">
-                        <h2
-                                class="accordion-header"
-                                id="panelsStayOpen-headingDiagonal"
-                        >
-                            <button
-                                    class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseDiagonal"
-                                    aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseDiagonal"
-                                    style="font-family: Inter"
-                            >
-                                Kích thước màn hình
-                            </button>
-                        </h2>
-                        <div
-                                id="panelsStayOpen-collapseDiagonal"
-                                class="accordion-collapse collapse"
-                                aria-labelledby="panelsStayOpen-headingDiagonal"
-                        >
-                            <div class="accordion-body">
-                                <!-- body -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value="6.1"
-                                            id="6.1inch"
-                                            name="size"
-                                    />
-                                    <label class="form-check-label items__name" for="6.1inch">
-                                        6.1 inch
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value="6.7"
-                                            id="6.7inch"
-                                            name="size"
-                                    />
-                                    <label class="form-check-label items__name" for="6.7inch">
-                                        6.7 inch
-                                    </label>
-                                </div>
-                                <!-- end -->
-                                <!-- start -->
-                                <div class="form-check">
-                                    <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value="5.8"
-                                            id="5.8inch"
-                                            name="size"
-                                    />
-                                    <label class="form-check-label items__name" for="5.8inch">
-                                        Dưới 5.8 inch
-                                    </label>
-                                </div>
-                                <!-- end -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end -->
                     <!-- start Color-->
                     <div class="accordion-item left__item colorFilter">
                         <h2
@@ -440,7 +369,7 @@
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
-                                            type="checkbox"
+                                            type="radio"
                                             value="100-500"
                                             id="500"
                                             name="price"
@@ -457,8 +386,8 @@
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
-                                            type="checkbox"
-                                            value="500-100"
+                                            type="radio"
+                                            value="500-1000"
                                             id="501"
                                             name="price"
                                     />
@@ -471,8 +400,8 @@
                                 <div class="form-check">
                                     <input
                                             class="form-check-input"
-                                            type="checkbox"
-                                            value="1000"
+                                            type="radio"
+                                            value="1001"
                                             id="1001"
                                             name="price"
                                     />
@@ -564,6 +493,11 @@
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-2">
+                                <c:if test="${totalPages==0}">
+                                    <div class="text-center">
+                                        Không tìm thấy sản phẩm nào
+                                    </div>
+                                </c:if>
                                 <c:forEach var="product" items="${products}">
                                     <!-- start -->
                                     <div class="col-lg-4 main__product--item m-1">
@@ -595,29 +529,31 @@
 
 
                 </div>
-                <div class="paging d-flex justify-content-center align-items-center ">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination ">
-                            <li class="page-item">
-                                <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/client/products?page=${currentPage -1}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <c:forEach begin="0" end="${totalPages -1}" varStatus="pageNum">
+                <c:if test="${totalPages > 0}">
+                    <div class="paging d-flex justify-content-center align-items-center ">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination ">
                                 <li class="page-item">
-                                    <a class="${(pageNum.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                       href="/client/products?page=${pageNum.index + 1}">${pageNum.index + 1}</a>
+                                    <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/client/products?page=${currentPage -1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
                                 </li>
-                            </c:forEach>
+                                <c:forEach begin="0" end="${totalPages -1}" varStatus="pageNum">
+                                    <li class="page-item">
+                                        <a class="${(pageNum.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
+                                           href="/client/products?page=${pageNum.index + 1}">${pageNum.index + 1}</a>
+                                    </li>
+                                </c:forEach>
 
-                            <li class="page-item">
-                                <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/client/products?page=${currentPage +1}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                                <li class="page-item">
+                                    <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/client/products?page=${currentPage +1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>

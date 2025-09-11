@@ -23,9 +23,13 @@ public class ProductClientController {
 
     @GetMapping
     public String productPage(Model model,
-                              @RequestParam(name = "page", defaultValue = "1") int page) {
+                              @RequestParam(name = "page", defaultValue = "1") int page,
+                              @RequestParam(name = "trade_mark", required = false)String tradeMark,
+                              @RequestParam(name = "color", required = false)String color,
+                              @RequestParam(name = "rom", required = false)String rom,
+                              @RequestParam(name = "price", required = false)String price) {
         Pageable pageable = PageRequest.of(page-1, 6);
-        Page<Product> productPage = productService.findAll(pageable);
+        Page<Product> productPage = productService.filterProduct(pageable, tradeMark, color, rom, price);
         List<Product> products =  productPage.getContent();
         int totalPages = productPage.getTotalPages();
 
@@ -34,4 +38,6 @@ public class ProductClientController {
         model.addAttribute("totalPages", totalPages);
         return "client/product";
     }
+
+
 }
