@@ -16,22 +16,34 @@ import java.util.Collections;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private UserService userService;
+    private final UserService userService;
 
+    @Autowired
     public CustomUserDetailsService(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.devpro.models.User user = this.userService.getUserByEmail(username);
+    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+        // Tìm user theo username trước
+        com.devpro.models.User user = userService.getUserByUsername(usernameOrEmail);
+
+        // Nếu không có thì tìm theo email
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            user = userService.getUserByEmail(usernameOrEmail);
         }
-        return new User(
-                user.getEmail(),
-                user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
-        );
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found: " + usernameOrEmail);
+        }
+
+        // Lấy role từ DB
+        String roleName = user.getRole().getName().toString();
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getUsername())
+                .password(user.getPassword())
+                .roles(roleName)
+                .build();
     }
 }

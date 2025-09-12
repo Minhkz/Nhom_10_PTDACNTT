@@ -28,7 +28,7 @@
                 </div>
                 <div class="gach border-start "></div>
                 <div class="input">
-                    <input type="email" name="username" placeholder="Nhập tên đăng nhập hoặc Email" class="input__email">
+                    <input type="text" name="username" placeholder="Nhập tên đăng nhập hoặc Email" class="input__email">
                 </div>
             </div>
             <div class="it2 signin__content--item border d-flex align-items-center gap-4">
