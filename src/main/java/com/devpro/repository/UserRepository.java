@@ -14,4 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface  UserRepository extends JpaRepository<User,Integer>, JpaSpecificationExecutor<User> {
     Page<User> findAll(Pageable pageable);
     Page<User> findAll(Specification<User> spec, Pageable pageable);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
+    User findByEmail(String email);
 }

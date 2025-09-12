@@ -67,4 +67,16 @@ public class UserService implements IUserService {
     public void delete(Integer id) {
         userRepository.deleteById(id);
     }
+
+    public Boolean checkEmailExists(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public Boolean checkUsernameExists(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

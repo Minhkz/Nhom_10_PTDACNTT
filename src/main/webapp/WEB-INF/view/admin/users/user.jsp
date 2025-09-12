@@ -92,30 +92,32 @@
 
                             </tbody>
                         </table>
+                        <c:if test="${totalPages > 0}">
                         <div class="paging d-flex justify-content-center align-items-center ">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination ">
                                     <li class="page-item">
-                                        <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/admin/users?page=${currentPage -1}" aria-label="Previous">
+                                        <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/admin/users?page=${currentPage -1}&name=${nameSearch}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                     <c:forEach begin="0" end="${totalPages -1}" varStatus="loop">
                                         <li class="page-item">
                                             <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                               href="/admin/users?page=${loop.index + 1}">
+                                               href="/admin/users?page=${loop.index + 1}&name=${nameSearch}">
                                                     ${loop.index + 1}
                                             </a>
                                         </li>
                                     </c:forEach>
                                     <li class="page-item">
-                                        <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/admin/users?page=${currentPage +1}" aria-label="Next">
+                                        <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/admin/users?page=${currentPage +1}&name=${nameSearch}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
+                        </c:if>
                     </div>
                 </div>
 

@@ -96,29 +96,31 @@
                     </div>
 
                 </div>
+                <c:if test="${totalPages > 0}">
                 <div class="paging d-flex justify-content-center align-items-center ">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination ">
                             <li class="page-item">
-                                <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/admin/products?page=${currentPage -1}" aria-label="Previous">
+                                <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/admin/products?page=${currentPage -1}&name=${nameSearch}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <c:forEach begin="0" end="${totalPages -1}" varStatus="pageNum">
                                 <li class="page-item">
                                     <a class="${(pageNum.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                       href="/admin/products?page=${pageNum.index + 1}">${pageNum.index + 1}</a>
+                                       href="/admin/products?page=${pageNum.index + 1}&name=${nameSearch}">${pageNum.index + 1}</a>
                                 </li>
                             </c:forEach>
 
                             <li class="page-item">
-                                <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/admin/products?page=${currentPage +1}" aria-label="Next">
+                                <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/admin/products?page=${currentPage +1}&name=${nameSearch}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                         </ul>
                     </nav>
                 </div>
+                </c:if>
             </div>
         </main>
         <!--footer-->

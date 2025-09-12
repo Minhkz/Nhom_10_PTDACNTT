@@ -23,4 +23,12 @@ public class RoleService implements IRoleService {
     public Role findById(Integer id) {
         return roleRepository.findById(id).get();
     }
+
+    @Override
+    public Role findByName(String name) {
+        Role.RoleType type = Role.RoleType.valueOf(name);
+        return roleRepository.findByName(type);
+    }
+
+
 }

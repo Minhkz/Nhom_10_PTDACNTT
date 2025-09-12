@@ -9,4 +9,6 @@ public interface IRoleService {
     List<RoleDto> findAll();
 
     Role findById(Integer id);
+
+    Role findByName(String name);
 }

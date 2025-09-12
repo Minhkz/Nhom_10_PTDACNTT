@@ -17,7 +17,7 @@
 
 <main>
     <!-- Banner -->
-    <div class="banner1 border-top border-bottom">
+    <div class="d-none d-lg-block banner1 border-top border-bottom">
         <div class="banner1__list">
             <div class="banner1__list--item">
                 <a href="#">
@@ -63,82 +63,77 @@
                 </div>
             </div>
 
-            <div class="categories d-flex justify-content-between">
-                            <!-- start -->
-                            <div class="category__card d-flex flex-column justify-content-center align-items-center ">
-                                <div class="category__card--icon">
-                                    <a href="/client/products">
-                                        <img src="${env}/client/images/home/Icon/Phones.png" alt="logo" >
-                                    </a>
-                                </div>
-                                <div class="category__card--title">
-                                    Phones
-                                </div>
+            <div class="categories container py-4">
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                    <!-- start -->
+                    <div class="col">
+                        <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                            <div class="category__card--icon">
+                                <a href="/client/products">
+                                    <img src="${env}/client/images/home/Icon/Phones.png" alt="logo">
+                                </a>
                             </div>
-                            <!-- end -->
-                            <!-- start -->
-                            <div class="category__card d-flex flex-column justify-content-center align-items-center ">
-                                <div class="category__card--icon">
-                                    <a href="#">
-                                        <img src="${env}/client/images/home/Icon/Smart Watches.png" alt="logo">
-                                    </a>
-                                </div>
-                                <div class="category__card--title">
-                                    Smart Watches
-                                </div>
-                            </div>
-                            <!-- end -->
-                            <!-- start -->
-                            <div class="category__card d-flex flex-column justify-content-center align-items-center ">
-                                <div class="category__card--icon">
-                                    <a href="#">
-                                        <img src="${env}/client/images/home/Icon/Cameras.png" alt="logo">
-                                    </a>
-                                </div>
-                                <div class="category__card--title">
-                                    Cameras
-                                </div>
-                            </div>
-                            <!-- end -->
-                            <!-- start -->
-                            <div class="category__card d-flex flex-column justify-content-center align-items-center ">
-                                <div class="category__card--icon">
-                                    <a href="#">
-                                        <img src="${env}/client/images/home/Icon/Headphones.png" alt="logo">
-                                    </a>
-                                </div>
-                                <div class="category__card--title">
-                                    Headphones
-                                </div>
-                            </div>
-                            <!-- end -->
-                            <!-- start -->
-                            <div class="category__card d-flex flex-column justify-content-center align-items-center ">
-                                <div class="category__card--icon">
-                                    <a href="#">
-                                        <img src="${env}/client/images/home/Icon/Computers.png" alt="logo">
-                                    </a>
-                                </div>
-                                <div class="category__card--title">
-                                    Computers
-                                </div>
-                            </div>
-                            <!-- end -->
-                            <!-- start -->
-                            <div class="category__card d-flex flex-column justify-content-center align-items-center ">
-                                <div class="category__card--icon">
-                                    <a href="#">
-                                        <img src="${env}/client/images/home/Icon/Gaming.png" alt="logo">
-                                    </a>
-                                </div>
-                                <div class="category__card--title">
-                                    Gaming
-                                </div>
-                            </div>
-                            <!-- end -->
+                            <div class="category__card--title">Phones</div>
+                        </div>
+                    </div>
+                    <!-- end -->
 
+                    <div class="col">
+                        <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                            <div class="category__card--icon">
+                                <a href="#">
+                                    <img src="${env}/client/images/home/Icon/Smart Watches.png" alt="logo">
+                                </a>
+                            </div>
+                            <div class="category__card--title">Smart Watches</div>
+                        </div>
+                    </div>
 
+                    <div class="col">
+                        <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                            <div class="category__card--icon">
+                                <a href="#">
+                                    <img src="${env}/client/images/home/Icon/Cameras.png" alt="logo">
+                                </a>
+                            </div>
+                            <div class="category__card--title">Cameras</div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                            <div class="category__card--icon">
+                                <a href="#">
+                                    <img src="${env}/client/images/home/Icon/Headphones.png" alt="logo">
+                                </a>
+                            </div>
+                            <div class="category__card--title">Headphones</div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                            <div class="category__card--icon">
+                                <a href="#">
+                                    <img src="${env}/client/images/home/Icon/Computers.png" alt="logo">
+                                </a>
+                            </div>
+                            <div class="category__card--title">Computers</div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="category__card d-flex flex-column justify-content-center align-items-center">
+                            <div class="category__card--icon">
+                                <a href="#">
+                                    <img src="${env}/client/images/home/Icon/Gaming.png" alt="logo">
+                                </a>
+                            </div>
+                            <div class="category__card--title">Gaming</div>
+                        </div>
+                    </div>
                 </div>
+            </div>
             </div>
             <!-- Tag -->
             <div class="tag ">
@@ -190,7 +185,7 @@
 
     </div>
     <!-- Big banner -->
-    <div class="bigBanner d-flex justify-content-between">
+    <div class="d-none d-lg-flex bigBanner justify-content-between">
         <!-- start -->
         <div class="bigBanner__item">
             <div class="bigBanner__item--img">
@@ -247,7 +242,9 @@
             </div>
         </div>
         <!-- end -->
+
     </div>
+
     <div class="container">
         <div class="discounts">
             <div class="discounts__title">Ưu đãi lên đến 50%</div>

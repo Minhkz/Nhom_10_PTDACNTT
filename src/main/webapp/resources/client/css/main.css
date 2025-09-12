@@ -1,27 +1,26 @@
 /* Header */
-.header__search{
-    width: 372px;
+.header__search {
+    width: 100%;
+    max-width: 372px;
     height: 56px;
     background-color: var(--bgr-search);
     border-radius: 10px;
-    
 }
-.header__search--input{
+.header__search--input {
     border: 0;
     outline: none;
     background-color: transparent;
+    color: var(--black);
+    width: 100%;
 }
-
-.menu{
-    margin: 34px 0;
+.menu .nav-link {
+    margin: 5px 10px;
+    color: var(--black);
 }
-.menu--icons{
-    margin: 28px 0;
+.menu .nav-link:hover {
+    color: #ccc;
 }
-.icons__cart{
-    position: relative;
-}
-.quantity{
+.icons__cart .quantity {
     position: absolute;
     top: -8px;
     right: -8px;
@@ -30,11 +29,41 @@
     height: 16px;
     background-color: red;
     border-radius: 50%;
+    font-size: 12px;
+}
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+.navbar-toggler {
+    border: none; /* bỏ viền mặc định */
+    background-color: #f1f1f1; /* nền xám nhạt nổi bật trên nền trắng */
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 6px;
+    }
+}
+@media (max-width: 991.98px) {
+    .navbar-nav .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: auto;
+        right: 0;
+        margin-top: .5rem;
+    }
 }
 /* Banner1 */
 .banner1{
     width: 100%;
-    height: 425px;
+
 }
 .banner1__list{
     display: flex;
@@ -47,23 +76,33 @@
     object-fit: cover;
 }
 /* category */
-.category__top{
+.category__top {
     margin-top: 80px;
 }
-.category__top--title{
+.category__top--title {
     font-size: 24px;
 }
-.categories{
+.categories {
     margin: 32px 0 80px 0;
     background-color: #FAFAFA;
 }
-.category__card{
+.category__card {
     width: 160px;
     height: 128px;
     border-radius: 10px;
     background-color: var(--bgr-ctg);
+    transition: all 0.3s ease;
+    text-align: center;
 }
-.active{
+.category__card--title {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.category__card:hover {
+    border: 2px solid var(--black);
+}
+.active {
     border-bottom: 3px solid var(--black);
 }
 /* Tag */
@@ -147,6 +186,7 @@
     font-weight: 300;
     white-space: nowrap;
 }
+
 /* Discount */
 .discounts__title{
     margin: 80px 0 32px 0;
@@ -158,7 +198,6 @@
 /* Big banner2 */
 .bigBanner2{
     width: 100%;
-    height: 448px;
 }
 .bigBanner2__item img{
     width: 100%;
@@ -169,24 +208,41 @@
     cursor: pointer;
 }
 /* Footer */
-.footer{
+.footer {
     width: 100%;
-    height: 504px;
-    background-color: var(--black);
-    position: relative;
+    background-color: #000;
+    color: #fff;
+    padding: 104px 20px;
 }
-.footer__info{
-    position: absolute;
-    top: 104px;
-    left: 160px;
+
+.footer h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
 }
-.footer__logo{
-    position: absolute;
-    top: 85px;
-    left: 155px;
+
+.footer p {
+    font-size: 14px;
+    color: #ccc;
 }
-.footer__icons{
-    position: absolute;
-    bottom: 104px;
-    left: 160px;
+
+.footer ul {
+    padding-left: 0;
+    list-style: none;
 }
+
+.footer ul li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.footer ul li:hover {
+    color: #fff;
+}
+
+.footer__icons img {
+    width: 16px;
+    height: 16px;
+}
+.footer
