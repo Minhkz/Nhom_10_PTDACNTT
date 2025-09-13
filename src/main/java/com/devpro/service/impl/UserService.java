@@ -1,6 +1,7 @@
 package com.devpro.service.impl;
 
 import com.devpro.dto.user.UserViewDto;
+import com.devpro.models.Role;
 import com.devpro.models.User;
 import com.devpro.repository.RoleRepository;
 import com.devpro.repository.UserRepository;
@@ -22,7 +23,7 @@ public class UserService implements IUserService {
     private  UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleService roleService;
 
     //save
     @Override
@@ -81,5 +82,8 @@ public class UserService implements IUserService {
     }
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+    public Role getRoleByName(String roleName) {
+        return roleService.findByName(roleName);
     }
 }

@@ -1,9 +1,9 @@
 .signin{
     width: 572px;
-    height: 624px;
+    height: 675px;
     box-shadow: 0 0 10px #c3c3c3;
     border-radius: 10px;
-    margin: 50px auto;
+    margin: 25px auto;
 }
 .signin__content{
     padding: 0 65px;

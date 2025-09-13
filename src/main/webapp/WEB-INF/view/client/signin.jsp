@@ -69,6 +69,20 @@
                 <span>Đăng nhập</span>
             </button>
         </form>
+        <div class="mt-2">
+            <div style="text-align: center"><span>Hoặc sử dụng</span></div>
+            <div class="d-flex justify-content-center align-items-center my-3"
+                 style="gap: 20px">
+                <a href="/oauth2/authorization/google" title="Đăng nhập với Google">
+                    <img height="40" width="40"
+                         src="${env}/client/images/provider/default-google.png" />
+                </a>
+                <a href="/oauth2/authorization/github" title="Đăng nhập với Github">
+                    <img height="40" width="40"
+                         src="${env}/client/images/provider/default-github.png" />
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 

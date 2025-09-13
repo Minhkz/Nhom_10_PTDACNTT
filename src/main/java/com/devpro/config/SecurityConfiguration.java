@@ -1,22 +1,22 @@
 package com.devpro.config;
 
 import com.devpro.service.CustomUserDetailsService;
+import com.devpro.service.impl.RoleService;
 import com.devpro.service.impl.UserService;
+import com.devpro.service.userinfo.CustomOAuth2UserService;
 import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
+
 
 
 @Configuration
@@ -60,7 +60,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http, UserService userService) throws Exception {
         // v6. lamda
         http
                 .authorizeHttpRequests(authorize -> authorize
@@ -69,16 +69,26 @@ public class SecurityConfiguration {
                         .permitAll()
 
                         .requestMatchers("/client/homes/**", "/products/**", "/signup/**", "/admin/images/**",
-                                "/client/**", "/css/**", "/js/**", "/images/**")
+                                "/client/**", "/css/**", "/js/**", "/images/**", "/")
                         .permitAll()
 
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated())
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/client/homes/signin")
+                        .successHandler(customSuccessHandler())
+                        .failureUrl("/signin?error")
+                        .userInfoEndpoint(user -> user
+                                .userService(new CustomOAuth2UserService(userService)))
+                )
+
+
+
 
                 .sessionManagement((sessionManagement) -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/logout?expired")
+                        .invalidSessionUrl("/signin?expired")
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(false))
 

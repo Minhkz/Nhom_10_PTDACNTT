@@ -12,13 +12,14 @@ CREATE TABLE roles(
 -- 2. Users
 CREATE TABLE users(
 	id 				INT AUTO_INCREMENT PRIMARY KEY,
-    username 		VARCHAR(100) NOT NULL UNIQUE,
+    username 		VARCHAR(100) UNIQUE,
 	email			VARCHAR(100) NOT NULL UNIQUE,
-    `password`		VARCHAR(50) NOT NULL,
+    `password`		VARCHAR(50),
     full_name		NVARCHAR(100)  NOT NULL,
-    address			NVARCHAR(100) NOT NULL,
-    phone			CHAR(15) NOT NULL UNIQUE,
+    address			NVARCHAR(100),
+    phone			CHAR(15) UNIQUE,
     avatar			VARCHAR(1000) ,
+    provider		VARCHAR(100),
     role_id			INT NOT NULL,
     created_date	DATETIME DEFAULT NOW(),
     FOREIGN KEY(role_id) REFERENCES roles(id) ON DELETE RESTRICT

@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     private UserService userService;
