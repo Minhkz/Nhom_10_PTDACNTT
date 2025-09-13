@@ -27,10 +27,10 @@
             <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
                href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false">
-                <img src="${env}/admin/images/avatar.jpg"
+                <img src="${env}/admin/images/user/${sessionScope.avatar}"
                      class="avatar img-fluid rounded-circle me-1"
                      alt="avatar" width="40" height="40">
-                <span class="text-light">Đặng Nhật Minh</span>
+                <span class="text-light">${sessionScope.fullName}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="pages-profile.html">
@@ -42,7 +42,12 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a></li>
                 <li><a class="dropdown-item" href="#">Help</a></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li>
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <button  class="dropdown-item">Sign out</button>
+                    </form>
+                </li>
             </ul>
         </li>
     </ul>

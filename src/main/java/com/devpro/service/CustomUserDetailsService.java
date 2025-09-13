@@ -15,10 +15,10 @@ import java.util.Collections;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
+    @Autowired
     private final UserService userService;
 
-    @Autowired
+
     public CustomUserDetailsService(UserService userService) {
         this.userService = userService;
     }

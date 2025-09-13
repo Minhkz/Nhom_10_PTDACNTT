@@ -9,10 +9,14 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 
 @Configuration
@@ -25,8 +29,22 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService(UserService userService) {
-    return new CustomUserDetailsService(userService);
-}
+        return new CustomUserDetailsService(userService);
+    }
+
+    @Bean
+    public SpringSessionRememberMeServices rememberMeServices() {
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+
+        rememberMeServices.setAlwaysRemember(true);
+
+        return rememberMeServices;
+    }
+
+    @Bean
+    public CustomSuccessHandler customSuccessHandler() {
+        return new CustomSuccessHandler();
+    }
 
     @Bean
     public DaoAuthenticationProvider authProvider(
@@ -43,31 +61,36 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // v6. lamda
         http
-                .authorizeHttpRequests(auth -> auth
-                        // Cho phép vào mấy trang public
-                        .requestMatchers("/resources/**", "/css/**", "/js/**", "/images/**",
-                                "/client/homes", "/client/homes/signup", "/client/homes/signup-create",
-                                "/client/homes/signin").permitAll()
+                .authorizeHttpRequests(authorize -> authorize
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                DispatcherType.INCLUDE)
+                        .permitAll()
 
-                        // Admin page phải có ROLE_ADMIN
+                        .requestMatchers("/client/homes/**", "/products/**", "/signup/**", "/admin/images/**",
+                                "/client/**", "/css/**", "/js/**", "/images/**")
+                        .permitAll()
+
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
-                        // Các request còn lại: chỉ cần đăng nhập
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/client/homes/signin")     // Form đăng nhập chung
-                        .loginProcessingUrl("/client/homes/signin") // URL submit login form
-                        .defaultSuccessUrl("/client/homes", true)   // Sau khi login thành công, vào đây
-                        .failureUrl("/client/homes/signin?error")   // Sai pass → redirect về login kèm error
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/client/homes")     // Logout xong về trang chủ
-                        .permitAll()
-                );
+                        .anyRequest().authenticated())
+
+                .sessionManagement((sessionManagement) -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/logout?expired")
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false))
+
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+
+                .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/client/homes/signin")
+                        .failureUrl("/client/homes/signin?error")
+                        .successHandler(customSuccessHandler())
+                        .permitAll());
+                //.exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
 
         return http.build();
     }

@@ -123,6 +123,11 @@
     background-color: #F6F6F6;
     border-radius: 10px;
     margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+.product__item:hover{
+    transform: translateY(-5px); !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); !important;
 }
 .product__item--box{
     padding: 24px 16px;

@@ -254,7 +254,7 @@
                                     aria-controls="panelsStayOpen-collapseMemory"
                                     style="font-family: Inter"
                             >
-                                Rom
+                                Bộ nhớ
                             </button>
                         </h2>
                         <div

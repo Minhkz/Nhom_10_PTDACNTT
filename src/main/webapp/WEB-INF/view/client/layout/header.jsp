@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- Header -->
 <nav class="navbar navbar-expand-lg header">
     <div class="container d-flex justify-content-between align-items-center">
@@ -33,31 +34,41 @@
             </ul>
 
             <!-- Icon phải -->
-            <ul class="navbar-nav ms-lg-auto d-flex flex-row gap-4 align-items-center menu--icons">
-                <li class="nav-item">
-                    <a href="#"><img src="${env}/client/images/home/Icon/heart.png" alt="heart"/></a>
-                </li>
-                <li class="nav-item position-relative icons__cart">
-                    <a href="./Shopping_Cart.html">
-                        <img src="${env}/client/images/home/Icon/cart.png" alt="cart"/>
-                    </a>
-                    <div class="quantity d-flex justify-content-center align-items-center">0</div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link p-0" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        <img src="${env}/client/images/home/Icon/User.png" alt="user" width="40" height="40"/>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="pages-profile.html">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Analytics</a></li>
-                        <li><hr class="dropdown-divider"/></li>
-                        <li><a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a></li>
-                        <li><a class="dropdown-item" href="#">Help</a></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <c:if test="${not empty pageContext.request.userPrincipal}">
+                <ul class="navbar-nav ms-lg-auto d-flex flex-row gap-4 align-items-center menu--icons">
+                    <li class="nav-item">
+                        <a href="#"><img src="${env}/client/images/home/Icon/heart.png" alt="heart"/></a>
+                    </li>
+                    <li class="nav-item position-relative icons__cart">
+                        <a href="./Shopping_Cart.html">
+                            <img src="${env}/client/images/home/Icon/cart.png" alt="cart"/>
+                        </a>
+                        <div class="quantity d-flex justify-content-center align-items-center">0</div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link p-0" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <img src="${env}/client/images/home/Icon/User.png" alt="user" width="40" height="40"/>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="pages-profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Analytics</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a></li>
+                            <li><a class="dropdown-item" href="#">Help</a></li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <button  class="dropdown-item">Sign out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </c:if>
+            <c:if test="${empty pageContext.request.userPrincipal}">
+                <a href="/client/homes/signin" class="text-black">Đăng nhập</a>
+            </c:if>
         </div>
     </div>
 </nav>

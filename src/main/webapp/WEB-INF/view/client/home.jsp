@@ -185,7 +185,7 @@
 
     </div>
     <!-- Big banner -->
-    <div class="d-none d-lg-flex bigBanner justify-content-between">
+    <div class="d-none d-lg-flex bigBanner justify-content-between mt-5">
         <!-- start -->
         <div class="bigBanner__item">
             <div class="bigBanner__item--img">
