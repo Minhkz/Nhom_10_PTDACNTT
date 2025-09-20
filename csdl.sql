@@ -87,6 +87,7 @@ CREATE TABLE order_product(
 CREATE TABLE carts (
   id 				INT AUTO_INCREMENT PRIMARY KEY,
   user_id 			INT NOT NULL UNIQUE,
+  sum				INT,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -95,6 +96,7 @@ CREATE TABLE cart_product(
 	cart_id			INT,
     product_id		INT,
     quantity		INT NOT NULL,
+    price			FLOAT,
     PRIMARY KEY(cart_id, product_id),
     FOREIGN KEY(cart_id) REFERENCES carts(id) ON DELETE CASCADE,
     FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE
@@ -153,5 +155,6 @@ CREATE TABLE payments (
   FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL,
   FOREIGN KEY (payment_method_id) REFERENCES payment_methods(id) ON DELETE SET NULL
 );
+
 
 

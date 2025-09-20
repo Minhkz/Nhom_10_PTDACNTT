@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -159,9 +160,19 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3 product__item m-2">
                                     <div class="product__item--box">
                                         <div class="box__header d-flex justify-content-end">
-                                            <a href="/admin">
-                                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
-                                            </a>
+                                            <button type="button"
+                                                    class="border-0 bg-transparent heart__item"
+                                                    data-id="${product.id}">
+                                                <c:choose>
+                                                    <c:when test="${fn:contains(wishlistId, product.id)}">
+                                                        <img src="${env}/client/images/home/Icon/heart-solid-full.png" alt="logo">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </button>
                                         </div>
                                         <div class="box__img">
                                             <a href="/client/productdetails/${product.id}">
@@ -257,9 +268,19 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3 product__item m-2">
                                     <div class="product__item--box">
                                         <div class="box__header d-flex justify-content-end">
-                                            <a href="#">
-                                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
-                                            </a>
+                                            <button type="button"
+                                                    class="border-0 bg-transparent heart__item"
+                                                    data-id="${productDis.id}">
+                                                <c:choose>
+                                                    <c:when test="${fn:contains(wishlistId, productDis.id)}">
+                                                        <img src="${env}/client/images/home/Icon/heart-solid-full.png" alt="logo">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </button>
                                         </div>
                                         <div class="box__img">
                                             <a href="/client/productdetails/${productDis.id}">
@@ -289,12 +310,62 @@
         </div>
     </div>
 </main>
-
+<!-- Nút Scroll to Top -->
+<button id="scrollTopBtn" title="Go to top">↑</button>
 <!--Footer-->
 <jsp:include page="/WEB-INF/view/client/layout/footer.jsp"></jsp:include>
 
 <!--js-->
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
+<script>
+    // Lấy phần tử nút
+    let scrollBtn = document.getElementById("scrollTopBtn");
 
+    // Hiện nút khi scroll xuống 200px
+    window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            scrollBtn.style.display = "block";
+        } else {
+            scrollBtn.style.display = "none";
+        }
+    };
+
+    // Khi click thì scroll về top
+    scrollBtn.onclick = function() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
+    $(document).ready(function () {
+        $(".heart__item").click(function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let img = btn.find("img");
+            let productId = btn.data("id");
+
+            $.ajax({
+                url: "/client/homes/add-to-wishlist/" + productId,
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "${_csrf.token}" // CSRF token
+                },
+                success: function (response) {
+                    // Toggle icon
+                    if (response.status === "added") {
+                        img.attr("src", "${env}/client/images/home/Icon/heart-solid-full.png");
+                    } else if (response.status === "removed") {
+                        img.attr("src", "${env}/client/images/home/Icon/heart.png");
+                    }
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra khi thêm vào wishlist!");
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

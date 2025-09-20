@@ -1,6 +1,10 @@
 package com.devpro.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 
 import java.io.Serializable;
@@ -8,6 +12,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "wishlist_items")
+@Getter
+@Setter
+@NoArgsConstructor
 public class WishlistItem implements Serializable {
     private static final long serialVersionUID = 1L;
 

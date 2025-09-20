@@ -37,10 +37,10 @@
             <c:if test="${not empty pageContext.request.userPrincipal}">
                 <ul class="navbar-nav ms-lg-auto d-flex flex-row gap-4 align-items-center menu--icons">
                     <li class="nav-item">
-                        <a href="#"><img src="${env}/client/images/home/Icon/heart.png" alt="heart"/></a>
+                        <a href="/client/wishlist"><img src="${env}/client/images/home/Icon/heart.png" alt="heart"/></a>
                     </li>
                     <li class="nav-item position-relative icons__cart">
-                        <a href="./Shopping_Cart.html">
+                        <a href="/client/carts">
                             <img src="${env}/client/images/home/Icon/cart.png" alt="cart"/>
                         </a>
                         <div class="quantity d-flex justify-content-center align-items-center">0</div>

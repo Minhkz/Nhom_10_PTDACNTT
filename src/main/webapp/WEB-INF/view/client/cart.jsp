@@ -55,64 +55,6 @@
                         </div>
                     </div>
                     <!-- end -->
-                    <!-- start -->
-                    <div class="left__product--item d-flex gap-3 border-bottom">
-                        <div class="item__img">
-                            <a href="#">
-                                <img src="${env}/client/images/Shopping Cart/headphone.png" alt="logo">
-                            </a>
-                        </div>
-                        <div class="left__product--content d-flex align-items-center">
-                            <div class="content__info">
-                                <p class="name">AirPods Max Silver</p>
-                                <p class="ma">#53459358345</p>
-                            </div>
-                            <div class="rightSide d-flex gap-4">
-                                <div class="counter d-flex align-items-center gap-2">
-                                    <button type="button" class="btn minus d-flex justify-content-center align-items-center">-</button>
-                                    <input type="text" value="   1" name="quanity" class="number">
-                                    <button type="button" class="btn plus d-flex justify-content-center align-items-center">+</button>
-                                </div>
-                                <div class="price ">
-                                    $549
-                                </div>
-                                <div class="cancel">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- end -->
-                    <!-- start -->
-                    <div class="left__product--item d-flex gap-3 border-bottom">
-                        <div class="item__img">
-                            <a href="#">
-                                <img src="${env}/client/images/Shopping Cart/watch.png" alt="logo">
-                            </a>
-                        </div>
-                        <div class="left__product--content d-flex align-items-center">
-                            <div class="content__info">
-                                <p class="name">Apple iPhone 14 Pro Max 128Gb Deep Purple</p>
-                                <p class="ma">#63632324</p>
-                            </div>
-                            <div class="rightSide d-flex gap-4">
-                                <div class="counter d-flex align-items-center gap-2">
-                                    <button type="button" class="btn minus d-flex justify-content-center align-items-center">-</button>
-                                    <input type="text" value="   1" name="quanity" class="number">
-                                    <button type="button" class="btn plus d-flex justify-content-center align-items-center">+</button>
-                                </div>
-                                <div class="price ">
-                                    $399
-                                </div>
-                                <div class="cancel">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- end -->
                 </div>
 
             </div>

@@ -1,8 +1,10 @@
 package com.devpro.service.impl;
 
 import com.devpro.dto.product.ProductDto;
-import com.devpro.models.Product;
+import com.devpro.models.*;
 import com.devpro.repository.ProductRepository;
+import com.devpro.repository.WishListItemRepository;
+import com.devpro.repository.WishListRepository;
 import com.devpro.service.IProductService;
 import com.devpro.service.specification.ProductSpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +23,14 @@ public class ProductService implements IProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private WishListRepository wishListRepository;
+
+    @Autowired
+    private WishListItemRepository wishListItemRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Product save(Product product) {
@@ -104,5 +115,41 @@ public class ProductService implements IProductService {
         }
 
         return  productRepository.findAll(combinedSpec, page);
+    }
+
+    public Boolean handleProductToWishList(String email, int productId) {
+        User user = this.userService.getUserByEmail(email);
+        if(user != null){
+            Wishlist wishlist = this.wishListRepository.findByUser(user);
+            if(wishlist == null){
+               Wishlist newWishlist = new Wishlist();
+               newWishlist.setUser(user);
+               wishlist = this.wishListRepository.save(newWishlist);
+            }
+
+            Optional<Product> product = productRepository.findById(productId);
+            if(product.isPresent()){
+                Product realProduct = product.get();
+                WishlistItemKey wishlistItemKey = new WishlistItemKey();
+                wishlistItemKey.setProductId(realProduct.getId());
+                wishlistItemKey.setWishlistId(wishlist.getId());
+
+                WishlistItem wishlistItem = wishListItemRepository.findBywishlistItemKey(wishlistItemKey);
+                if(wishlistItem != null){
+                    this.wishListItemRepository.delete(wishlistItem);
+                    return false;
+                }
+                else{
+                    wishlistItem = new WishlistItem();
+                    wishlistItem.setWishlistItemKey(wishlistItemKey);
+                    wishlistItem.setProduct(realProduct);
+                    wishlistItem.setWishlist(wishlist);
+                    this.wishListItemRepository.save(wishlistItem);
+                    return true;
+                }
+
+            }
+        }
+        return false;
     }
 }

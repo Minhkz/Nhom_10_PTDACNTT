@@ -24,6 +24,9 @@ public class Cart implements Serializable {
     @NonNull
     private User user;
 
+    @Column
+    private Integer sum;
+
     @OneToMany(mappedBy = "cart")
     private List<CartProduct> cartProducts;
 }

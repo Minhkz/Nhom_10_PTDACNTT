@@ -21,6 +21,9 @@ public class CartProduct implements Serializable {
     @NonNull
     private Integer quantity;
 
+    @Column
+    private Double price;
+
     @ManyToOne
     @MapsId("cartId")
     @JoinColumn(name = "cart_id")
