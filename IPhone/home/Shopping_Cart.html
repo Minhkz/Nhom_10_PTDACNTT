@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
+
+    <!-- Slick slider -->
+    <link rel="stylesheet" href="../slick_slider/slick.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/common/base.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/products-page.css" />
+    <link rel="stylesheet" href="../css/Product_Details_Page.css" />
+    <link rel="stylesheet" href="../css/Shopping_Cart.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- JQuery -->
+    <link rel="stylesheet" href="../js/jquery-3.6.0.min.js" />
+
+    <!-- Load -->
+    <script src="../js/headAndFoot.js"></script>
+    <title>Shopping Cart</title>
+  </head>
+  <body>
+    <header id="header"></header>
+    <script>
+      load("#header", "./common/header.html");
+    </script>
+
+    <main>
+      <div class="container">
+        <div class="main d-flex justify-content-between">
+          <div class="left">
+            <div class="left__content fs-4 fw-bold">Giỏ hàng</div>
+
+            <div class="left__product">
+              <!-- start -->
+              <div class="left__product--item d-flex gap-3 border-bottom">
+                <div class="item__img">
+                  <a href="#">
+                    <img src="../images/Shopping Cart/iphone.png" alt="logo" />
+                  </a>
+                </div>
+                <div class="left__product--content d-flex align-items-center">
+                  <div class="content__info">
+                    <p class="name">
+                      Apple iPhone 14 Pro Max 128Gb Deep Purple
+                    </p>
+                    <p class="ma">#25139526913984</p>
+                  </div>
+                  <div class="rightSide d-flex gap-4">
+                    <div class="counter d-flex align-items-center gap-2">
+                      <button
+                        type="button"
+                        class="btn minus d-flex justify-content-center align-items-center"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        value="   1"
+                        name="quanity"
+                        class="number"
+                      />
+                      <button
+                        type="button"
+                        class="btn plus d-flex justify-content-center align-items-center"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div class="price">$399</div>
+                    <div class="cancel">
+                      <i class="fa-solid fa-xmark"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end -->
+              <!-- start -->
+              <div class="left__product--item d-flex gap-3 border-bottom">
+                <div class="item__img">
+                  <a href="#">
+                    <img
+                      src="../images/Shopping Cart/headphone.png"
+                      alt="logo"
+                    />
+                  </a>
+                </div>
+                <div class="left__product--content d-flex align-items-center">
+                  <div class="content__info">
+                    <p class="name">AirPods Max Silver</p>
+                    <p class="ma">#53459358345</p>
+                  </div>
+                  <div class="rightSide d-flex gap-4">
+                    <div class="counter d-flex align-items-center gap-2">
+                      <button
+                        type="button"
+                        class="btn minus d-flex justify-content-center align-items-center"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        value="   1"
+                        name="quanity"
+                        class="number"
+                      />
+                      <button
+                        type="button"
+                        class="btn plus d-flex justify-content-center align-items-center"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div class="price">$549</div>
+                    <div class="cancel">
+                      <i class="fa-solid fa-xmark"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end -->
+              <!-- start -->
+              <div class="left__product--item d-flex gap-3 border-bottom">
+                <div class="item__img">
+                  <a href="#">
+                    <img src="../images/Shopping Cart/watch.png" alt="logo" />
+                  </a>
+                </div>
+                <div class="left__product--content d-flex align-items-center">
+                  <div class="content__info">
+                    <p class="name">
+                      Apple iPhone 14 Pro Max 128Gb Deep Purple
+                    </p>
+                    <p class="ma">#63632324</p>
+                  </div>
+                  <div class="rightSide d-flex gap-4">
+                    <div class="counter d-flex align-items-center gap-2">
+                      <button
+                        type="button"
+                        class="btn minus d-flex justify-content-center align-items-center"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        value="   1"
+                        name="quanity"
+                        class="number"
+                      />
+                      <button
+                        type="button"
+                        class="btn plus d-flex justify-content-center align-items-center"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div class="price">$399</div>
+                    <div class="cancel">
+                      <i class="fa-solid fa-xmark"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end -->
+            </div>
+          </div>
+          <div class="right border">
+            <div class="subcontainer">
+              <div class="right__Summary">Chi tiết đơn hàng</div>
+              <div class="right__content">
+                <div class="sale mb-4">
+                  <label for="sale" class="title">Mã giảm giá</label>
+                  <br />
+                  <div
+                    class="khung__sale border d-flex justify-content-center align-items-center"
+                  >
+                    <input
+                      type="text"
+                      id="sale"
+                      class="input"
+                      placeholder="Nhập mã giảm giá"
+                    />
+                  </div>
+                </div>
+                <div class="right__content--card mb-4">
+                  <label for="card" class="title"
+                    >Vui lòng nhập mã thẻ thành viên</label
+                  >
+                  <br />
+                  <div
+                    class="khung border d-flex justify-content-center align-items-center"
+                  >
+                    <input
+                      type="text"
+                      id="card"
+                      placeholder="Nhập số thẻ"
+                      class="input1"
+                    />
+                    <button type="button" class="btn btn-outline-dark but">
+                      Xác nhận
+                    </button>
+                  </div>
+                </div>
+                <div class="price">
+                  <div class="Subtotal d-flex justify-content-between">
+                    <p class="left__text">Tạm tính</p>
+                    <p class="right__text">$2347</p>
+                  </div>
+                  <div class="Taxes mt-3 mb-3">
+                    <div class="Taxes1 d-flex justify-content-between">
+                      <p class="Taxes__text">Ước tính thuế</p>
+                      <p class="right__text">$50</p>
+                    </div>
+                    <div class="Taxes2 d-flex justify-content-between">
+                      <p class="Taxes__text">Phí vận chuyển và xử lý</p>
+                      <p class="right__text">$29</p>
+                    </div>
+                  </div>
+                  <div class="Total d-flex justify-content-between">
+                    <p class="left__text">Tổng tiền</p>
+                    <p class="right__text">$2426</p>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline-dark but1">
+                  Thanh toán
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer"></footer>
+    <script>
+      load("#footer", "./common/footer.html");
+    </script>
+    <!-- Bootstrap -->
+    <script src="../bootstrap/popper.min.js"></script>
+    <script src="../bootstrap/bootstrap.min.js"></script>
+  </body>
+</html>
