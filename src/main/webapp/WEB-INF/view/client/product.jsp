@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -527,8 +528,13 @@
                                                 <div class="box__details--name text-center">
                                                         ${product.name}
                                                 </div>
-                                                <div class="box__details--price mt-3 mb-4">$${product.price}</div>
-                                                <button type="button" class="btn btn-dark box__details--btn">Mua ngay</button>
+                                                <div class="box__details--price mt-3 mb-4">
+                                                    <fmt:formatNumber type="number" value="${product.price}" />đ
+                                                </div>
+                                                <form action="/client/productdetails/${product.id}" method="GET">
+                                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                    <button type="submit" class="btn btn-dark box__details--btn">Mua ngay</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +53,7 @@
                                 </div>
                                 <div class="rightSide d-flex gap-4">
                                     <div class="price ">
-                                        $${product.price}
+                                        <fmt:formatNumber type="number" value="${product.price}" />đ
                                     </div>
                                     <div class="cancel">
                                             <button type="button" class="btn btn-danger" data-id="${product.id}">

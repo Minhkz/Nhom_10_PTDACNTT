@@ -1,6 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<!-- CSRF token dùng cho Ajax -->
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+
 <!-- Header -->
 <nav class="navbar navbar-expand-lg header">
     <div class="container d-flex justify-content-between align-items-center">
@@ -43,7 +48,7 @@
                         <a href="/client/carts">
                             <img src="${env}/client/images/home/Icon/cart.png" alt="cart"/>
                         </a>
-                        <div class="quantity d-flex justify-content-center align-items-center">0</div>
+                        <div class="quantity d-flex justify-content-center align-items-center" id="count-item">${cartCount}</div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link p-0" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
@@ -72,3 +77,15 @@
         </div>
     </div>
 </nav>
+<!-- Script CSRF dùng chung cho Ajax -->
+<script>
+    $(document).ready(function () {
+        let token = $("meta[name='_csrf']").attr("content");
+        let header = $("meta[name='_csrf_header']").attr("content");
+
+
+        $(document).ajaxSend(function (e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+    });
+</script>

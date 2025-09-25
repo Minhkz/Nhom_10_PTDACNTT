@@ -1,12 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--css-->
     <jsp:include page="/WEB-INF/view/client/layout/css.jsp"></jsp:include>
     <link rel="stylesheet" href="${env}/client/css/products-page.css" />
@@ -46,20 +44,23 @@
                     <h1>${productd.name}</h1>
                 </div>
                 <div class="price m-2">
-                    <h2>$${productd.price}</h2>
+                    <h2>
+                        <fmt:formatNumber type="number" value="${productd.price}" />đ
+                    </h2>
                 </div>
                 <div class="shortDesc m-2">
                     ${productd.shortDesc}
                 </div>
-
+                <%--                --%>
                 <div class="counter d-flex align-items-center gap-2">
                     <button type="button" class="btn minus d-flex justify-content-center align-items-center">-</button>
-                    <input type="text" value="   1" name="quanity" class="number">
+                    <input type="text" value="" name="quanity" class="number" data-id="${productd.id}" data-price="${productd.price}" style="text-align:center">
                     <button type="button" class="btn plus d-flex justify-content-center align-items-center">+</button>
                 </div>
+                <%--                --%>
                 <div class="infos__btn d-flex justify-content-between m-2">
-                    <button type="button" class="btn btn-outline-dark nut">Thêm vào yêu thích</button>
-                    <button type="button" class="btn btn-outline-dark nut">Thêm vào giỏ hàng</button>
+                    <button type="button" class="btn btn-outline-dark nut" id="showToastWish" data-id="${productd.id}">Thêm vào yêu thích</button>
+                    <button type="button" class="btn btn-outline-dark nut" id="showToastCart" data-id="${productd.id}">Thêm vào giỏ hàng</button>
                     <button type="button" class="btn btn-outline-dark nut">Mua ngay</button>
                 </div>
                 <div class="infos__icons m-2">
@@ -144,8 +145,13 @@
                                         </div>
                                         <div class="box__details d-flex flex-column justify-content-between align-items-center">
                                             <div class="box__details--name text-center">${product.name}</div>
-                                            <div class="box__details--price mt-3 mb-4">$${product.price}</div>
-                                            <button type="button" class="btn btn-dark box__details--btn">Mua ngay</button>
+                                            <div class="box__details--price mt-3 mb-4">
+                                                <fmt:formatNumber type="number" value="${product.price}" />đ
+                                            </div>
+                                            <form action="/client/productdetails/${product.id}" method="GET">
+                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                <button type="submit" class="btn btn-dark box__details--btn">Mua ngay</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -159,10 +165,132 @@
     </div>
 </main>
 
+<!-- Container toast -->
+<div class="toast-container position-fixed end-0 p-3"
+     style="z-index: 1100; top: 70px; pointer-events: none;">
+    <div id="dynamicToast" class="toast text-white border-0"
+         role="alert" aria-live="assertive" aria-atomic="true"
+         style="pointer-events: auto;">
+        <div class="d-flex">
+            <div id="toastBody" class="toast-body"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
 <!--footer-->
 <jsp:include page="/WEB-INF/view/client/layout/footer.jsp"></jsp:include>
 
 <!--js-->
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
+<script>
+    function showToast(type, message) {
+        const toastEl = document.getElementById("dynamicToast");
+        const toastBody = document.getElementById("toastBody");
+
+        // Reset class
+        toastEl.className = "toast text-white border-0";
+
+        // Gán màu theo type
+        if (type === "success") {
+            toastEl.classList.add("bg-success");
+        } else if (type === "error") {
+            toastEl.classList.add("bg-danger");
+        } else if (type === "info") {
+            toastEl.classList.add("bg-primary");
+        }
+
+        // Gán nội dung
+        toastBody.innerText = message;
+
+        // Hiện toast
+        const toast = new bootstrap.Toast(toastEl, {
+            autohide: true,
+            delay: 2000
+        });
+        toast.show();
+    }
+
+    $(document).ready(function () {
+        //wishlist
+        const btn = document.getElementById("showToastWish");
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let productId = btn.data("id");
+
+            $.ajax({
+                url: "/client/productdetails/add-to-wishlist/" + productId,
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "${_csrf.token}"
+                },
+                success: function (response) {
+                    if (response.status === "success") {
+                        showToast("success", "Thêm vào wishlist thành công!");
+                    } else {
+                        showToast("error", "Sản phẩm đã có trong wishlist!");
+                    }
+                },
+                error: function () {
+                    showToast("error", "Có lỗi xảy ra khi thêm vào wishlist!");
+                }
+            });
+        });
+        //cart
+        const btnCart = document.getElementById("showToastCart");
+        btnCart.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let productId = btn.data("id");
+            let quantity = $(".number").val();
+
+            $.ajax({
+                url: "/client/productdetails/add-to-cart/" + productId +"?quantity=" + quantity,
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "${_csrf.token}"
+                },
+                success: function (response) {
+                    if (response.status === "success") {
+                        showToast("success", "Thêm vào cart thành công!");
+                        $("#count-item").text(response.count);
+                    } else {
+                        showToast("error", "Không thể thêm vào cart!");
+                    }
+                },
+                error: function () {
+                    showToast("error", "Có lỗi xảy ra khi thêm vào cart!");
+                }
+            });
+        });
+        //plus và minus
+        // chọn input quantity
+        let inputQuantity = $(".number");
+
+        // đảm bảo giá trị mặc định = 1
+        inputQuantity.val(1);
+
+        // nút plus
+        $(".plus").on("click", function () {
+            let currentVal = parseInt(inputQuantity.val()) || 1;
+            inputQuantity.val(currentVal + 1);
+        });
+
+        // nút minus
+        $(".minus").on("click", function () {
+            let currentVal = parseInt(inputQuantity.val()) || 1;
+            if (currentVal > 1) {
+                inputQuantity.val(currentVal - 1);
+            }
+        });
+
+    });
+
+
+</script>
 </body>
 </html>

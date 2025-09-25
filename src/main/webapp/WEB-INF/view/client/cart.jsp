@@ -1,118 +1,300 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+
     <!--css-->
     <jsp:include page="/WEB-INF/view/client/layout/css.jsp"></jsp:include>
     <link rel="stylesheet" href="${env}/client/css/products-page.css" />
     <link rel="stylesheet" href="${env}/client/css/Product_Details_Page.css">
     <link rel="stylesheet" href="${env}/client/css/Shopping_Cart.css">
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Shopping Cart</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <!--header-->
 <jsp:include page="/WEB-INF/view/client/layout/header.jsp"></jsp:include>
+
 <main>
     <div class="container">
-        <div class="main d-flex justify-content-between">
+
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb">
+            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/client/homes">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">Cart</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- Giỏ hàng -->
+        <div class="main d-flex justify-content-between ${totalItem > 0 ? '' : 'd-none'}">
             <div class="left">
-                <div class="left__content fs-4 fw-bold ">
-                    Giỏ hàng
+                <div class="left__content fs-4 fw-bold d-flex justify-content-between">
+                    <h2>Giỏ hàng</h2>
+                    <div class="check-all">
+                        <input type="checkbox" id="cart-check-all" style="width: 20px; height: 20px;">
+                    </div>
                 </div>
 
                 <div class="left__product">
-                    <!-- start -->
-                    <div class="left__product--item d-flex gap-3 border-bottom">
-                        <div class="item__img">
-                            <a href="#">
-                                <img src="${env}/client/images/Shopping Cart/iphone.png" alt="logo">
-                            </a>
-                        </div>
-                        <div class="left__product--content d-flex align-items-center">
-                            <div class="content__info">
-                                <p class="name">Apple iPhone 14 Pro Max 128Gb Deep Purple</p>
-                                <p class="ma">#25139526913984</p>
+                    <c:forEach items="${cartProducts}" var="cartProduct">
+                        <!-- start item -->
+                        <div id="item-${cartProduct.product.id}"
+                             class="left__product--item d-flex gap-3 border-bottom">
+                            <div class="item__img">
+                                <a href="/client/productdetails/${cartProduct.product.id}">
+                                    <img src="${env}/admin/images/product/${cartProduct.product.avatar}" alt="logo">
+                                </a>
                             </div>
-                            <div class="rightSide d-flex gap-4">
-                                <div class="counter d-flex align-items-center gap-2">
-                                    <button type="button" class="btn minus d-flex justify-content-center align-items-center">-</button>
-                                    <input type="text" value="   1" name="quanity" class="number">
-                                    <button type="button" class="btn plus d-flex justify-content-center align-items-center">+</button>
+                            <div class="left__product--content">
+                                <div class="content__info">
+                                    <p class="name">${cartProduct.product.name}</p>
+                                    <p class="ma">#${cartProduct.product.id}</p>
                                 </div>
-                                <div class="price ">
-                                    $399
-                                </div>
-                                <div class="cancel">
-                                    <i class="fa-solid fa-xmark"></i>
+                                <div class="rightSide d-flex gap-4 align-items-center">
+                                    <div class="counter d-flex align-items-center gap-2">
+                                        <button type="button" class="btn minus d-flex justify-content-center align-items-center">-</button>
+                                        <input type="text"
+                                               value="${cartProduct.quantity}"
+                                               data-id="${cartProduct.product.id}"
+                                               data-price="${cartProduct.product.price}"
+                                               name="quantity"
+                                               class="number"
+                                               style="text-align: center;">
+                                        <button type="button" class="btn plus d-flex justify-content-center align-items-center">+</button>
+                                    </div>
+                                    <div class="price">
+                                        <fmt:formatNumber type="number"
+                                                          value="${cartProduct.product.price * cartProduct.quantity}" />đ
+                                    </div>
+                                    <div class="cancel">
+                                        <button type="button" class="btn btn-danger btn-remove"
+                                                data-id="${cartProduct.product.id}">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                    <div class="check-item">
+                                        <input type="checkbox" id="cart-check-item" style="width: 20px; height: 20px;">
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-                    <!-- end -->
+                        <!-- end item -->
+                    </c:forEach>
                 </div>
-
             </div>
+
+            <!-- Thanh toán -->
             <div class="right border">
                 <div class="subcontainer">
-                    <div class="right__Summary">
-                        Chi tiết đơn hàng
-                    </div>
+                    <div class="right__Summary">Chi tiết đơn hàng</div>
                     <div class="right__content">
-                        <div class="sale mb-4">
-                            <label for="sale" class="title">Mã giảm giá</label>
-                            <br>
-                            <div class="khung__sale border d-flex justify-content-center align-items-center">
-                                <input type="text" id="sale" class="input " placeholder="Nhập mã giảm giá">
-                            </div>
-
-                        </div>
-                        <div class="right__content--card mb-4">
-                            <label for="card" class="title">Vui lòng nhập mã thẻ thành viên</label>
-                            <br>
-                            <div class="khung border d-flex justify-content-center align-items-center">
-                                <input type="text" id="card" placeholder="Nhập số thẻ" class="input1">
-                                <button type="button" class="btn btn-outline-dark but ">Xác nhận</button>
-                            </div>
-
-                        </div>
                         <div class="price">
                             <div class="Subtotal d-flex justify-content-between">
                                 <p class="left__text">Tạm tính</p>
-                                <p class="right__text">$2347</p>
+                                <p class="right__text">
+                                    <fmt:formatNumber type="number" value="${tmpprice}" />đ
+                                </p>
                             </div>
                             <div class="Taxes mt-3 mb-3">
                                 <div class="Taxes1 d-flex justify-content-between">
                                     <p class="Taxes__text">Ước tính thuế</p>
-                                    <p class="right__text">$50</p>
+                                    <p class="right__text">
+                                        <fmt:formatNumber type="number" value="${shippingFee}" />đ
+                                    </p>
                                 </div>
                                 <div class="Taxes2 d-flex justify-content-between">
                                     <p class="Taxes__text">Phí vận chuyển và xử lý</p>
-                                    <p class="right__text">$29</p>
+                                    <p class="right__text">
+                                        <fmt:formatNumber type="number" value="${serviceFee}" />đ
+                                    </p>
                                 </div>
                             </div>
                             <div class="Total d-flex justify-content-between">
                                 <p class="left__text">Tổng tiền</p>
-                                <p class="right__text">$2426</p>
-
+                                <p class="right__text">
+                                    <fmt:formatNumber type="number" value="${total}" />đ
+                                </p>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-dark but1 ">Thanh toán</button>
+                        <button type="button" class="btn btn-outline-dark but1">Thanh toán</button>
+                        <p class="mt-3">Tổng sản phẩm: <span id="count-item">${totalItem}</span></p>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Giỏ hàng trống -->
+        <div class="empty-cart text-center ${totalItem == 0 ? '' : 'd-none'}" style="margin: 23px;">
+            Không có sản phẩm nào
         </div>
     </div>
 </main>
 
 <!--footer-->
 <jsp:include page="/WEB-INF/view/client/layout/footer.jsp"></jsp:include>
+
 <!--js-->
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
+<script>
+    $(document).ready(function () {
+        // Vào trang -> tất cả item đều checked
+        $("#cart-check-all").prop("checked", true);
+        $("input[id='cart-check-item']").prop("checked", true);
+
+        // Hàm tính lại tổng tiền
+        function updateSummary() {
+            let subtotal = 0;
+
+            $("input[id='cart-check-item']:checked").each(function () {
+                let inputQuantity = $(this).closest(".rightSide").find(".number");
+                let price = parseFloat(inputQuantity.data("price")) || 0;
+                let quantity = parseInt(inputQuantity.val()) || 1;
+                subtotal += price * quantity;
+            });
+
+            // Tính toán lại dựa trên phí dịch vụ + phí ship
+            let serviceFee = ${serviceFee};
+            let shippingFee = ${shippingFee};
+            let total = subtotal + serviceFee + shippingFee;
+
+            // Cập nhật vào giao diện
+            $(".Subtotal .right__text").text(new Intl.NumberFormat('vi-VN').format(subtotal) + "đ");
+            $(".Taxes1 .right__text").text(new Intl.NumberFormat('vi-VN').format(shippingFee) + "đ");
+            $(".Taxes2 .right__text").text(new Intl.NumberFormat('vi-VN').format(serviceFee) + "đ");
+            $(".Total .right__text").text(new Intl.NumberFormat('vi-VN').format(total) + "đ");
+        }
+
+        // Khi bấm check-all
+        $("#cart-check-all").on("change", function () {
+            let checked = $(this).is(":checked");
+            $("input[id='cart-check-item']").prop("checked", checked);
+            updateSummary();
+        });
+
+        // Khi tick/untick từng item
+        $(document).on("change", "input[id='cart-check-item']", function () {
+            let allChecked = $("input[id='cart-check-item']").length === $("input[id='cart-check-item']:checked").length;
+            $("#cart-check-all").prop("checked", allChecked);
+            updateSummary();
+        });
+
+        // xoá sản phẩm
+        $(document).on("click", ".btn-remove", function (e) {
+            e.preventDefault();
+            const productId = $(this).data("id");
+
+            $.ajax({
+                url: "/client/carts/cancel/" + productId,
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "${_csrf.token}"
+                },
+                success: function (response) {
+                    if (response.status === "success") {
+                        // xoá trên UI
+                        $("#item-" + productId).remove();
+                        $("#count-item").text(response.sum);
+
+                        // nếu hết sản phẩm thì ẩn main, show empty-cart
+                        if (response.sum === 0) {
+                            $(".main").addClass("d-none");
+                            $(".empty-cart").removeClass("d-none");
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra khi xóa sản phẩm!");
+                }
+            });
+        });
+
+        // tăng số lượng
+        $(document).on("click", ".plus", function () {
+            let inputQuantity = $(this).siblings(".number");
+            let productId = inputQuantity.data("id");
+            $.ajax({
+                url: "/client/carts/plus/" + productId,
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "${_csrf.token}"
+                },
+                success: function (response) {
+                    if (response.status === "success") {
+                        inputQuantity.val(response.quantity);
+                        // Cập nhật giá sản phẩm
+                        let priceElement = inputQuantity.closest(".rightSide").find(".price");
+                        priceElement.text(new Intl.NumberFormat('vi-VN').format(response.totalPrice) + "đ");
+
+                        // Cập nhật tổng tiền
+                        let totalElement = $(".right__content .Total .right__text");
+                        totalElement.text(new Intl.NumberFormat('vi-VN').format(response.price + ${serviceFee} + ${shippingFee}) + "đ");
+
+                        // Cập nhật tạm tính
+                        let subtotalElement = $(".right__content .Subtotal .right__text");
+                        subtotalElement.text(new Intl.NumberFormat('vi-VN').format(response.price) + "đ");
+                    }
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra khi tăng số lượng!");
+                }
+
+            });
+        });
+
+        // giảm số lượng
+        $(document).on("click", ".minus", function () {
+            let inputQuantity = $(this).siblings(".number");
+            let currentVal = parseInt(inputQuantity.val()) || 1;
+            let productId = inputQuantity.data("id");
+
+            if (currentVal > 1) {
+                $.ajax({
+                    url: "/client/carts/minus/" + productId, // Giả sử bạn có endpoint /minus/{id}
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "${_csrf.token}"
+                    },
+                    success: function (response) {
+                        if (response.status === "success") {
+                            // Cập nhật số lượng trên UI
+                            inputQuantity.val(response.quantity);
+
+                            // Cập nhật giá sản phẩm
+                            let priceElement = inputQuantity.closest(".rightSide").find(".price");
+                            priceElement.text(new Intl.NumberFormat('vi-VN').format(response.totalPrice) + "đ");
+
+                            // Cập nhật tổng tiền
+                            let totalElement = $(".right__content .Total .right__text");
+                            totalElement.text(new Intl.NumberFormat('vi-VN').format(response.price + ${serviceFee} + ${shippingFee}) + "đ");
+
+                            // Cập nhật tạm tính
+                            let subtotalElement = $(".right__content .Subtotal .right__text");
+                            subtotalElement.text(new Intl.NumberFormat('vi-VN').format(response.price) + "đ");
+                        }
+                    },
+                    error: function () {
+                        alert("Có lỗi xảy ra khi giảm số lượng!");
+                    }
+                });
+            }
+        });
+
+
+    });
+</script>
 </body>
 </html>

@@ -2,11 +2,10 @@ package com.devpro.service.impl;
 
 import com.devpro.dto.product.ProductDto;
 import com.devpro.models.*;
-import com.devpro.repository.ProductRepository;
-import com.devpro.repository.WishListItemRepository;
-import com.devpro.repository.WishListRepository;
+import com.devpro.repository.*;
 import com.devpro.service.IProductService;
 import com.devpro.service.specification.ProductSpec;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +30,12 @@ public class ProductService implements IProductService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     @Override
     public Product save(Product product) {
@@ -148,6 +153,82 @@ public class ProductService implements IProductService {
                     return true;
                 }
 
+            }
+        }
+        return false;
+    }
+
+    public Boolean addProductToWishlist(String email, int productId) {
+        User user = this.userService.getUserByEmail(email);
+        if(user != null){
+            Wishlist wishlist = this.wishListRepository.findByUser(user);
+            if(wishlist == null){
+                Wishlist newWishlist = new Wishlist();
+                newWishlist.setUser(user);
+                wishlist = this.wishListRepository.save(newWishlist);
+            }
+            Optional<Product> product = productRepository.findById(productId);
+            if(product.isPresent()){
+                Product realProduct = product.get();
+                WishlistItemKey wishlistItemKey = new WishlistItemKey();
+                wishlistItemKey.setProductId(realProduct.getId());
+                wishlistItemKey.setWishlistId(wishlist.getId());
+                WishlistItem wishlistItem = wishListItemRepository.findBywishlistItemKey(wishlistItemKey);
+                if(wishlistItem != null){
+                    return false;
+                }else {
+                    wishlistItem = new WishlistItem();
+                    wishlistItem.setWishlistItemKey(wishlistItemKey);
+                    wishlistItem.setProduct(realProduct);
+                    wishlistItem.setWishlist(wishlist);
+                    this.wishListItemRepository.save(wishlistItem);
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+
+    public Boolean handleProductToCart(String email, int productId, HttpSession session, int quantity){
+        User  user = this.userService.getUserByEmail(email);
+        if(user != null){
+            Cart cart = this.cartRepository.findByUser(user);
+            if(cart == null){
+                Cart newCart = new Cart();
+                newCart.setUser(user);
+                newCart.setSum(0);
+                cart = this.cartRepository.save(newCart);
+            }
+
+            Optional<Product> product = productRepository.findById(productId);
+            if(product.isPresent()){
+                Product realProduct = product.get();
+
+                CartProduct cartProduct = this.cartItemRepository.findByCartAndProduct(cart,realProduct);
+                if(cartProduct != null){
+                    cartProduct.setQuantity(cartProduct.getQuantity()+ quantity);
+                    this.cartItemRepository.save(cartProduct);
+                }else{
+                    cartProduct = new CartProduct();
+
+                    CartProductKey cartProductKey = new CartProductKey();
+                    cartProductKey.setProductId(realProduct.getId());
+                    cartProductKey.setCartId(cart.getId());
+
+                    cartProduct.setCart(cart);
+                    cartProduct.setProduct(realProduct);
+                    cartProduct.setCartProductKey(cartProductKey);
+                    cartProduct.setPrice(realProduct.getPrice());
+                    cartProduct.setQuantity(quantity);
+
+                    int s = cart.getSum()+1;
+                    cart.setSum(s);
+                    cartRepository.save(cart);
+                    cartItemRepository.save(cartProduct);
+                    session.setAttribute("sum", s);
+                }
+                return true;
             }
         }
         return false;
