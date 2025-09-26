@@ -72,6 +72,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
 
+    @OneToMany(mappedBy = "userId")
+    private List<Address> addresses;
+
     @PrePersist
     public void defaultValues() {
         if (this.createdDate == null) {

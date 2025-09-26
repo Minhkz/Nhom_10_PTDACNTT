@@ -47,12 +47,12 @@ public class CartController {
 
 
             for(CartProduct cartProduct : cartProducts) {
-                tmpprice+=cartProduct.getPrice();
+                tmpprice+= cartProduct.getPrice()*cartProduct.getQuantity();
             }
 
         }
-        double shippingFee = 5000;
-        double serviceFee = 29000;
+        double shippingFee = 29000;
+        double serviceFee = 5000;
 
         double total= tmpprice + shippingFee + serviceFee;
         model.addAttribute("total",total);
@@ -71,18 +71,43 @@ public class CartController {
         User user = this.userService.getUserByEmail(email);
         Cart cart = this.cartRepository.findByUser(user);
         Product product = productService.findById(id);
-        Map<String, Object> response = new HashMap<>();
-        CartProductKey cartProductKey = new CartProductKey();
-        cartProductKey.setCartId(cart.getId());
-        cartProductKey.setProductId(product.getId());
-        int s = cart.getSum() == 0?0:cart.getSum() -1;
-        session.setAttribute("sum", s);
+
+        // Xoá sản phẩm trong cart
+        CartProductKey key = new CartProductKey();
+        key.setCartId(cart.getId());
+        key.setProductId(product.getId());
+        this.cartItemRepository.deleteById(key);
+
+        // Lấy lại danh sách giỏ hàng
+        List<CartProduct> cartItems = this.cartItemRepository.findByCart(cart);
+
+        // Tính lại tổng số sản phẩm
+        int s = cartItems.stream().mapToInt(CartProduct::getQuantity).sum();
         cart.setSum(s);
-        this.cartItemRepository.deleteById(cartProductKey);
+        session.setAttribute("sum", s);
+        cartRepository.save(cart);
+
+        // Tính lại subtotal
+        long subtotal = cartItems.stream()
+                .mapToLong(item -> Math.round(item.getPrice() * item.getQuantity()))
+                .sum();
+
+        long serviceFee = s > 0 ? 5000 : 0;
+        long shippingFee = s > 0 ? 29000 : 0;
+        long total = subtotal + serviceFee + shippingFee;
+
+        Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
         response.put("sum", s);
+        response.put("subtotal", subtotal);
+        response.put("serviceFee", serviceFee);
+        response.put("shippingFee", shippingFee);
+        response.put("total", total);
+
         return response;
     }
+
+
 
     @PostMapping("/plus/{id}")
     @ResponseBody
@@ -135,4 +160,6 @@ public class CartController {
         response.put("price", price);
         return response;
     }
+
+
 }

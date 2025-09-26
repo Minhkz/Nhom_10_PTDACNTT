@@ -9,6 +9,11 @@
     <jsp:include page="/WEB-INF/view/client/layout/css.jsp"></jsp:include>
     <link rel="stylesheet" href="${env}/client/css/products-page.css" />
     <link rel="stylesheet" href="${env}/client/css/Product_Details_Page.css">
+
+    <!--CSRF-->
+    <meta name="_csrf" content="${_csrf.token}" />
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
+
     <title>Product Details</title>
 </head>
 <body>
@@ -26,7 +31,7 @@
                     <li class="breadcrumb-item">
                         <a href="/client/products">Phones</a>
                     </li>
-                    <li class="breadcrumb-item" aria-current="page">iPhone 14 Pro Max</li>
+                    <li class="breadcrumb-item" aria-current="page">${productd.name}</li>
                 </ol>
             </nav>
         </div>
@@ -61,7 +66,7 @@
                 <div class="infos__btn d-flex justify-content-between m-2">
                     <button type="button" class="btn btn-outline-dark nut" id="showToastWish" data-id="${productd.id}">Thêm vào yêu thích</button>
                     <button type="button" class="btn btn-outline-dark nut" id="showToastCart" data-id="${productd.id}">Thêm vào giỏ hàng</button>
-                    <button type="button" class="btn btn-outline-dark nut">Mua ngay</button>
+                    <a href="/client/payment/address" class="btn btn-outline-dark nut d-flex justify-content-center align-items-center">Mua ngay</a>
                 </div>
                 <div class="infos__icons m-2">
                     <img src="${env}/client/images/productsDetailsPage/Icons.png" alt="logo">
@@ -149,7 +154,6 @@
                                                 <fmt:formatNumber type="number" value="${product.price}" />đ
                                             </div>
                                             <form action="/client/productdetails/${product.id}" method="GET">
-                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                                 <button type="submit" class="btn btn-dark box__details--btn">Mua ngay</button>
                                             </form>
                                         </div>
@@ -178,119 +182,14 @@
         </div>
     </div>
 </div>
-
+<!-- Nút Scroll to Top -->
+<button id="scrollTopBtn" title="Go to top">↑</button>
 <!--footer-->
 <jsp:include page="/WEB-INF/view/client/layout/footer.jsp"></jsp:include>
 
 <!--js-->
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
-<script>
-    function showToast(type, message) {
-        const toastEl = document.getElementById("dynamicToast");
-        const toastBody = document.getElementById("toastBody");
-
-        // Reset class
-        toastEl.className = "toast text-white border-0";
-
-        // Gán màu theo type
-        if (type === "success") {
-            toastEl.classList.add("bg-success");
-        } else if (type === "error") {
-            toastEl.classList.add("bg-danger");
-        } else if (type === "info") {
-            toastEl.classList.add("bg-primary");
-        }
-
-        // Gán nội dung
-        toastBody.innerText = message;
-
-        // Hiện toast
-        const toast = new bootstrap.Toast(toastEl, {
-            autohide: true,
-            delay: 2000
-        });
-        toast.show();
-    }
-
-    $(document).ready(function () {
-        //wishlist
-        const btn = document.getElementById("showToastWish");
-        btn.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            let btn = $(this);
-            let productId = btn.data("id");
-
-            $.ajax({
-                url: "/client/productdetails/add-to-wishlist/" + productId,
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": "${_csrf.token}"
-                },
-                success: function (response) {
-                    if (response.status === "success") {
-                        showToast("success", "Thêm vào wishlist thành công!");
-                    } else {
-                        showToast("error", "Sản phẩm đã có trong wishlist!");
-                    }
-                },
-                error: function () {
-                    showToast("error", "Có lỗi xảy ra khi thêm vào wishlist!");
-                }
-            });
-        });
-        //cart
-        const btnCart = document.getElementById("showToastCart");
-        btnCart.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            let btn = $(this);
-            let productId = btn.data("id");
-            let quantity = $(".number").val();
-
-            $.ajax({
-                url: "/client/productdetails/add-to-cart/" + productId +"?quantity=" + quantity,
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": "${_csrf.token}"
-                },
-                success: function (response) {
-                    if (response.status === "success") {
-                        showToast("success", "Thêm vào cart thành công!");
-                        $("#count-item").text(response.count);
-                    } else {
-                        showToast("error", "Không thể thêm vào cart!");
-                    }
-                },
-                error: function () {
-                    showToast("error", "Có lỗi xảy ra khi thêm vào cart!");
-                }
-            });
-        });
-        //plus và minus
-        // chọn input quantity
-        let inputQuantity = $(".number");
-
-        // đảm bảo giá trị mặc định = 1
-        inputQuantity.val(1);
-
-        // nút plus
-        $(".plus").on("click", function () {
-            let currentVal = parseInt(inputQuantity.val()) || 1;
-            inputQuantity.val(currentVal + 1);
-        });
-
-        // nút minus
-        $(".minus").on("click", function () {
-            let currentVal = parseInt(inputQuantity.val()) || 1;
-            if (currentVal > 1) {
-                inputQuantity.val(currentVal - 1);
-            }
-        });
-
-    });
-
-
-</script>
+<script src="${env}/client/js/common.js"></script>
+<script src="${env}/client/js/product_details.js"></script>
 </body>
 </html>
