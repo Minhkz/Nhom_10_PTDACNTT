@@ -63,21 +63,35 @@ CREATE TABLE products(
     FOREIGN KEY (spec_id) REFERENCES specifications(id) ON DELETE CASCADE
 );
 
-
+CREATE TABLE address(
+	id				INT AUTO_INCREMENT PRIMARY KEY,
+    user_id			INT NOT NULL,
+    location		CHAR(20) NOT NULL,
+    short_desc		NVARCHAR(100),
+    detail_desc		NVARCHAR(500) NOT NULL,
+    reciver_name	NVARCHAR(100) NOT NULL,
+    reciver_phone	CHAR(15) NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
 
 -- 6. Orders
 CREATE TABLE orders(
 	id 				INT AUTO_INCREMENT PRIMARY KEY,
     user_id 		INT DEFAULT NULL,
     total_price		DOUBLE,
+    address_id		INT UNIQUE,
+    total_product   INT,
+    `status`		NVARCHAR(50),
+    FOREIGN KEY(address_id) REFERENCES address(id) ON DELETE SET NULL,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 -- 7. Order_Product
 CREATE TABLE order_product(
-	order_id			INT,
+	order_id		INT,
     product_id		INT,
     quantity		INT NOT NULL,
+    price			DOUBLE NOT NULL,
     PRIMARY KEY (order_id, product_id),
     FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE
@@ -155,6 +169,9 @@ CREATE TABLE payments (
   FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL,
   FOREIGN KEY (payment_method_id) REFERENCES payment_methods(id) ON DELETE SET NULL
 );
+
+-- 15. Address
+
 
 
 

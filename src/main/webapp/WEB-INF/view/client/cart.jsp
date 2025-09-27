@@ -107,20 +107,20 @@
                     <div class="right__Summary">Chi tiết đơn hàng</div>
                     <div class="right__content">
                         <div class="price">
-                            <div class="Subtotal d-flex justify-content-between">
+                            <div class="Subtotal d-flex justify-content-between" >
                                 <p class="left__text">Tạm tính</p>
                                 <p class="right__text">
-                                    <fmt:formatNumber type="number" value="${tmpprice}" />đ
+                                    <fmt:formatNumber type="number" value="${subtotal}" />đ
                                 </p>
                             </div>
                             <div class="Taxes mt-3 mb-3">
-                                <div class="Taxes1 d-flex justify-content-between">
+                                <div class="Taxes1 d-flex justify-content-between" data-fee="${serviceFee}">
                                     <p class="Taxes__text">Ước tính thuế</p>
                                     <p class="right__text">
                                         <fmt:formatNumber type="number" value="${serviceFee}" />đ
                                     </p>
                                 </div>
-                                <div class="Taxes2 d-flex justify-content-between">
+                                <div class="Taxes2 d-flex justify-content-between" data-fee="${shippingFee}">
                                     <p class="Taxes__text">Phí vận chuyển và xử lý</p>
                                     <p class="right__text">
                                         <fmt:formatNumber type="number" value="${shippingFee}" />đ
@@ -134,8 +134,9 @@
                                 </p>
                             </div>
                         </div>
-                        <form method="get" action="/client/payment/address">
+                        <form id="checkoutForm" method="post" action="/client/payment/address">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" id="selectedIds" name="selectedIds" value=""/>
                             <button type="submit" class="btn btn-outline-dark but1">Thanh toán</button>
                         </form>
 

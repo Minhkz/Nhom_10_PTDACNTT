@@ -35,7 +35,18 @@ public class Address implements Serializable {
     @NonNull
     private String detailDesc;
 
+    @Column(name = "reciver_name", length = 100)
+    @NonNull
+    private String reciverName;
+
+    @Column(name = "reciver_phone", length = 15)
+    @NonNull
+    private String reciverPhone;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
+
+    @OneToOne(mappedBy = "address")
+    private Order order;
 }

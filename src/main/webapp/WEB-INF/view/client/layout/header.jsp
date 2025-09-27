@@ -56,11 +56,14 @@
                             <img src="${env}/client/images/home/Icon/User.png" alt="user" width="40" height="40"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="pages-profile.html">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Analytics</a></li>
-                            <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a></li>
-                            <li><a class="dropdown-item" href="#">Help</a></li>
+                            <li class="d-flex align-items-center flex-column" style="min-width: 210px;">
+                                <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                     src="/images/avatar/${sessionScope.avatar}" />
+                                <div class="text-center my-3">
+                                    <c:out value="${sessionScope.fullName}" />
+                                </div>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Lịch sử mua hàng</a></li>
                             <li>
                                 <form action="/logout" method="post">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

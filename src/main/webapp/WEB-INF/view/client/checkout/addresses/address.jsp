@@ -53,44 +53,61 @@
             <div class="address__main--title" style="margin-bottom: 32px">
                 Chọn địa chỉ
             </div>
-            <div class="address__main--content d-flex justify-content-between align-items-center" style="height: 144px; background-color: #F6F6F6; border-radius: 5px; margin-bottom: 24px">
-                <div class="main__content--left d-flex p-4">
-                    <input type="radio" name="address" checked="checked" value="" style="width: 24px; height: 24px;"/>
-                    <div class="ms-4">
-                        <div class="d-flex align-items-center">
-                            <strong>
-                                2118 Thornridge
-                            </strong>
-                            <div class="status d-flex justify-content-center align-items-center"  style=" width: 53px; height: 23px;background-color: black; color: white; border-radius: 5px; font-size: 12px; margin-left: 16px">
-                                HOME
+            <form action="/client/payment/shipping" method="post">
+                <c:forEach var="address" items="${addresses}">
+                    <div class="address__main--content d-flex justify-content-between align-items-center"
+                         style="height: 144px; background-color: #F6F6F6; border-radius: 5px; margin-bottom: 24px">
+
+                        <div class="main__content--left d-flex p-4">
+                            <input type="radio" name="addressId" value="${address.id}"
+                                   style="width: 24px; height: 24px;"/>
+                            <div class="ms-4">
+                                <div class="d-flex align-items-center">
+                                    <strong>${address.shortDesc}</strong>
+                                    <div class="status d-flex justify-content-center align-items-center"
+                                         style="width: 53px; height: 23px;background-color: black; color: white; border-radius: 5px; font-size: 12px; margin-left: 16px">
+                                            ${address.location}
+                                    </div>
+                                </div>
+                                <p>${address.detailDesc}</p>
                             </div>
                         </div>
-                        <p>2118 Thornridge Cir. Syracuse, Connecticut 35624</p>
+                        <div class="main__content--people">
+                            <strong>${address.reciverName}</strong>,
+                            <strong>${address.reciverPhone}</strong>
+                        </div>
+                        <div class="address__main--right me-4">
+                            <a href="/client/payment/address/updates/${address.id}">
+                                <img src="${env}/client/images/checkout/address/To_edit.png" alt="logo">
+                            </a>
+                            <a href="/client/payment/address/deletes/${address.id}"
+                               onclick="return confirm('Are you sure you want to delete this item?');">
+                                <img src="${env}/client/images/checkout/address/Close.png" alt="logo">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="address__main--right me-4">
-                    <a href="#">
-                        <img src="${env}/client/images/checkout/address/To_edit.png" alt="logo">
-                    </a>
-                    <a href="#">
-                        <img src="${env}/client/images/checkout/address/Close.png" alt="logo">
-                    </a>
-                </div>
-            </div>
-            <div style="margin-bottom: 64px">
-                <a href="#">
-                    <img src="${env}/client/images/checkout/address/Add_New_Line.png" alt="logo">
-                </a>
-            </div>
-            <div class="d-flex justify-content-end align-items-center mb-5">
-                <form method="get" action="/client/carts">
-                    <button type="submit" class="btn btn-outline-dark" style="width: 208px; height: 64px; margin-right: 24px">Back</button>
-                </form>
-                <form action="/client/payment/shipping" method="GET">
-                    <button type="submit" class="btn btn-dark" style="width: 208px; height: 64px;">Next</button>
-                </form>
+                </c:forEach>
 
-            </div>
+                <div style="margin-bottom: 64px">
+                    <a href="/client/payment/address/creates">
+                        <img src="${env}/client/images/checkout/address/Add_New_Line.png" alt="logo">
+                    </a>
+                </div>
+
+                <div class="d-flex justify-content-end align-items-center mb-5">
+                    <!-- Nút Back dùng link -->
+                    <a href="/client/carts" class="btn btn-outline-dark d-flex justify-content-center align-items-center"
+                       style="width: 208px; height: 64px; margin-right: 24px">Back</a>
+
+                    <!-- CSRF token -->
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                    <!-- Nút Next submit form -->
+                    <button type="submit" class="btn btn-dark" style="width: 208px; height: 64px;">Next</button>
+                </div>
+            </form>
+
+
         </div>
     </div>
 </main>

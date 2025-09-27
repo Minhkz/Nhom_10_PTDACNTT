@@ -58,7 +58,7 @@ public class CartController {
         model.addAttribute("total",total);
         model.addAttribute("shippingFee", shippingFee);
         model.addAttribute("serviceFee", serviceFee);
-        model.addAttribute("tmpprice",tmpprice);
+        model.addAttribute("subtotal",tmpprice);
         model.addAttribute("totalItem", totalItem);
         return "client/cart";
     }
@@ -82,7 +82,7 @@ public class CartController {
         List<CartProduct> cartItems = this.cartItemRepository.findByCart(cart);
 
         // Tính lại tổng số sản phẩm
-        int s = cartItems.stream().mapToInt(CartProduct::getQuantity).sum();
+        int s = cart.getSum()-1;
         cart.setSum(s);
         session.setAttribute("sum", s);
         cartRepository.save(cart);
@@ -92,8 +92,8 @@ public class CartController {
                 .mapToLong(item -> Math.round(item.getPrice() * item.getQuantity()))
                 .sum();
 
-        long serviceFee = s > 0 ? 5000 : 0;
-        long shippingFee = s > 0 ? 29000 : 0;
+        long serviceFee =  5000 ;
+        long shippingFee =  29000;
         long total = subtotal + serviceFee + shippingFee;
 
         Map<String, Object> response = new HashMap<>();

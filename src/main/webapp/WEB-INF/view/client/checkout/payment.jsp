@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--css-->
     <jsp:include page="/WEB-INF/view/client/layout/css.jsp"></jsp:include>
+    <link rel="stylesheet" href="${env}/client/css/pay.css" />
     <title>My Iphone</title>
 </head>
 <body>
@@ -50,6 +51,106 @@
             </ul>
         </nav>
         <div class="address__main">
+            <div class="container py-5">
+                <div class="row g-4">
+                    <!-- Summary -->
+                    <div class="col-lg-8">
+                        <div class="card-summary shadow-sm">
+                            <h5 class="mb-3">Summary</h5>
+                            <c:forEach var="cartProduct" items="${products}">
+                                <div class="summary-item">
+                                    <div class="d-flex align-items-center">
+                                        <img src="${env}/admin/images/product/${cartProduct.product.avatar}" alt="iPhone">
+                                        <span>${cartProduct.product.name}</span>
+                                    </div>
+                                    <strong><fmt:formatNumber type="number" value="${cartProduct.price * cartProduct.quantity}" />đ</strong>
+                                    <strong>${cartProduct.quantity}</strong>
+                                </div>
+                            </c:forEach>
+
+                            <p class="mt-3 mb-1"><small>Địa chỉ</small></p>
+                            <p>${address.detailDesc}</p>
+
+                            <p class="mt-3 mb-1"><small>Người nhận</small></p>
+                            <p>${address.reciverName}, ${address.reciverPhone}</p>
+
+
+                            <p class="mb-1"><small>Phương thức giao hàng</small></p>
+                            <p>
+                                <c:choose>
+                                    <c:when test="${typeShip == 29000}">
+                                        Tiết kiệm
+                                    </c:when>
+                                    <c:when test="${typeShip == 49000}">
+                                        Giao nhanh
+                                    </c:when>
+                                    <c:otherwise>
+                                        Miễn phí
+                                    </c:otherwise>
+                                </c:choose>
+                            </p>
+
+                            <div class="d-flex justify-content-between"><span>Tạm tính</span><strong>
+                                <fmt:formatNumber type="number" value="${subTotal}" />đ</strong>
+                            </div>
+                            <div class="d-flex justify-content-between"><span>Thuế ước tính</span><strong>
+                                <fmt:formatNumber type="number" value="${thue}" />đ
+                            </strong></div>
+                            <div class="d-flex justify-content-between"><span>Phí vận chuyển</span>
+                                <strong>
+                                    <fmt:formatNumber type="number" value="${typeShip}" />đ
+                                </strong>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between fs-5"><span>Tổng cộng</span>
+                                <strong>
+                                    <fmt:formatNumber type="number" value="${total}" />đ
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment -->
+                    <div class="col-lg-4">
+                        <h5 class="mb-3">Hình thức thanh toán</h5>
+                        <form method="POST" action="#">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment" id="live" checked="checked" value="COD">
+                                    <label class="form-check-label" for="live">
+                                        Thanh toán khi nhận hàng
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment" id="vnpay">
+                                    <label class="form-check-label" for="vnpay">
+                                        Thanh toán bằng ví VNpay
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-flex">
+                                <a href="/client/payment/get/shipping"
+                                   class="btn btn-outline-dark d-flex justify-content-center align-items-center"
+                                   style="width: 208px; height: 64px; margin-right: 24px">
+                                    Back
+                                </a>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button type="submit" class="btn btn-dark"
+                                        style="width: 208px; height: 64px;">
+                                    Thanh toán
+                                </button>
+                                <a href="/client/payment/checkout/success"
+                                   class="btn btn-outline-dark d-flex justify-content-center align-items-center"
+                                   style="width: 208px; height: 64px; margin-right: 24px">
+                                    Pay
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
     </div>
@@ -61,5 +162,6 @@
 
 <!--js-->
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
+<script src="${env}/client/js/common.js"></script>
 </body>
 </html>

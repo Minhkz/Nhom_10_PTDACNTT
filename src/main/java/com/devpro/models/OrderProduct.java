@@ -21,6 +21,9 @@ public class OrderProduct implements Serializable {
     @Column
     private Integer quantity;
 
+    @Column
+    private Double price;
+
     @ManyToOne
     @MapsId("orderId")
     @JoinColumn(name = "orderId")

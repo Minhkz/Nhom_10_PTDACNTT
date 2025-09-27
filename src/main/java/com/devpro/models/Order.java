@@ -1,10 +1,7 @@
 package com.devpro.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,6 +24,17 @@ public class Order implements Serializable {
 
     @Column(name = "total_price")
     private Double totalPrice;
+
+    @Column(name = "total_product")
+    @NonNull
+    private Integer quantity;
+
+    @Column
+    private String status;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @OneToMany(mappedBy = "order")
     private List<OrderProduct> orderProducts;

@@ -1,58 +1,72 @@
 $(document).ready(function () {
-    // Vào trang -> tất cả item đều checked
-    $("#cart-check-all").prop("checked", true);
-    $("input[class='cart-check-item']").prop("checked", true);
-
-    let thue = parseFloat($(".Taxes1 .right__text").text().replace(/[^\d]/g, "")) || 0;
-    let ship = parseFloat($(".Taxes2 .right__text").text().replace(/[^\d]/g, "")) || 0;
+    // Helper
+    const formatVND = (n) => new Intl.NumberFormat('vi-VN').format(n) + "đ";
+    const parseNumberFromText = (txt) => parseFloat(String(txt).replace(/[^\d.-]/g, "")) || 0;
 
 
-    // Hàm tính lại tổng tiền
+    const $checkAll = $("#cart-check-all");
+    const $itemsContainer = $(".left__product");
 
-    function updateSummary()
-    {
+    // Ban đầu: check tất cả
+    if ($(".cart-check-item").length > 0) {
+        $(".cart-check-item").prop("checked", true);
+        $checkAll.prop("checked", true);
+    } else {
+        $checkAll.prop("checked", false);
+    }
+
+    // Cập nhật trạng thái của nút check-all theo các item
+    function refreshCheckAllState() {
+        const total = $(".cart-check-item").length;
+        const checked = $(".cart-check-item:checked").length;
+        $checkAll.prop("checked", total > 0 && total === checked);
+    }
+
+    // Tính lại summary dựa trên những item đang checked
+    function updateSummary() {
         let subtotal = 0;
 
-        $("input[class='cart-check-item']:checked").each(function () {
-            let inputQuantity = $(this).closest(".rightSide").find(".number");
-            let price = parseFloat(inputQuantity.data("price")) || 0;
-            let quantity = parseInt(inputQuantity.val()) || 1;
-            subtotal += price * quantity;
+
+        $(".cart-check-item:checked").each(function () {
+            const $inputQuantity = $(this).closest(".rightSide").find(".number");
+            const unitPrice = parseFloat($inputQuantity.data("price")) || 0;
+            const qty = parseInt($inputQuantity.val()) || 1;
+            subtotal += unitPrice * qty;
         });
 
-        // Nếu không có sản phẩm nào được chọn thì phí = 0
-        let serviceFee = 0;
-        let shippingFee = 0;
-        if (subtotal > 0) {
-            serviceFee = thue;
-            shippingFee = ship;
-        }
+        const baseServiceFee = parseFloat($(".Taxes1").data("fee")) || 0;
+        const baseShippingFee = parseFloat($(".Taxes2").data("fee")) || 0;
 
-        let total = subtotal + serviceFee + shippingFee;
 
-        // Cập nhật vào giao diện
-        $(".Subtotal .right__text").text(new Intl.NumberFormat('vi-VN').format(subtotal) + "đ");
-        $(".Taxes1 .right__text").text(new Intl.NumberFormat('vi-VN').format(serviceFee) + "đ");
-        $(".Taxes2 .right__text").text(new Intl.NumberFormat('vi-VN').format(shippingFee) + "đ");
-        $(".Total .right__text").text(new Intl.NumberFormat('vi-VN').format(total) + "đ");
+        const serviceFee = subtotal > 0 ? baseServiceFee : 0;
+        const shippingFee = subtotal > 0 ? baseShippingFee : 0;
+        const total = subtotal + serviceFee + shippingFee;
+
+        // Cập nhật giao diện
+        $(".Subtotal .right__text").text(formatVND(subtotal));
+        $(".Taxes1 .right__text").text(formatVND(serviceFee));
+        $(".Taxes2 .right__text").text(formatVND(shippingFee));
+        $(".Total .right__text").text(formatVND(total));
     }
 
 
-    // Khi bấm check-all
-    $("#cart-check-all").on("change", function () {
-        let checked = $(this).is(":checked");
-        $("input[id='cart-check-item']").prop("checked", checked);
+    // Events: check all / check item
+
+    $checkAll.on("change", function () {
+        const checked = $(this).is(":checked");
+        $(".cart-check-item").prop("checked", checked);
         updateSummary();
     });
 
-    // Khi tick/untick từng item
-    $(document).on("change", "input[id='cart-check-item']", function () {
-        let allChecked = $("input[id='cart-check-item']").length === $("input[id='cart-check-item']:checked").length;
-        $("#cart-check-all").prop("checked", allChecked);
+    // delegation cho từng item (dùng class)
+    $(document).on("change", ".cart-check-item", function () {
+        refreshCheckAllState();
         updateSummary();
     });
 
-    // xoá sản phẩm
+
+    // Xoá sản phẩm
+
     $(document).on("click", ".btn-remove", function (e) {
         e.preventDefault();
         const productId = $(this).data("id");
@@ -66,17 +80,16 @@ $(document).ready(function () {
                     $("#item-" + productId).remove();
                     $("#count-item").text(response.sum);
 
-                    // Cập nhật lại chi tiết đơn hàng
-                    $(".Subtotal .right__text").text(new Intl.NumberFormat('vi-VN').format(response.subtotal) + "đ");
-                    $(".Taxes1 .right__text").text(new Intl.NumberFormat('vi-VN').format(response.serviceFee) + "đ");
-                    $(".Taxes2 .right__text").text(new Intl.NumberFormat('vi-VN').format(response.shippingFee) + "đ");
-                    $(".Total .right__text").text(new Intl.NumberFormat('vi-VN').format(response.total) + "đ");
+                    // Cập nhật summary và trạng thái check-all
+                    refreshCheckAllState();
+                    updateSummary();
 
-                    // Nếu hết sản phẩm thì ẩn main, show empty-cart
                     if (response.sum === 0) {
                         $(".main").addClass("d-none");
                         $(".empty-cart").removeClass("d-none");
                     }
+                } else {
+                    alert("Xoá thất bại!");
                 }
             },
             error: function () {
@@ -85,62 +98,56 @@ $(document).ready(function () {
         });
     });
 
-    // tăng số lượng
+
+    // Tăng số lượng
+
     $(document).on("click", ".plus", function () {
-        let inputQuantity = $(this).siblings(".number");
-        let productId = inputQuantity.data("id");
+        const $inputQuantity = $(this).siblings(".number");
+        const productId = $inputQuantity.data("id");
+
         $.ajax({
             url: "/client/carts/plus/" + productId,
             type: "POST",
             success: function (response) {
                 if (response.status === "success") {
-                    inputQuantity.val(response.quantity);
-                    // Cập nhật giá sản phẩm
-                    let priceElement = inputQuantity.closest(".rightSide").find(".price");
-                    priceElement.text(new Intl.NumberFormat('vi-VN').format(response.totalPrice) + "đ");
+                    // cập nhật input và giá item
+                    $inputQuantity.val(response.quantity);
+                    const $priceElement = $inputQuantity.closest(".rightSide").find(".price");
+                    $priceElement.text(formatVND(response.totalPrice));
 
-                    // Cập nhật tổng tiền
-                    let totalElement = $(".right__content .Total .right__text");
-                    totalElement.text(new Intl.NumberFormat('vi-VN').format(response.price + thue + ship) + "đ");
-
-                    // Cập nhật tạm tính
-                    let subtotalElement = $(".right__content .Subtotal .right__text");
-                    subtotalElement.text(new Intl.NumberFormat('vi-VN').format(response.price) + "đ");
+                    // recompute toàn bộ summary
+                    updateSummary();
+                } else {
+                    alert("Cập nhật số lượng thất bại!");
                 }
             },
             error: function () {
                 alert("Có lỗi xảy ra khi tăng số lượng!");
             }
-
         });
     });
 
-    // giảm số lượng
+
+    // Giảm số lượng
+
     $(document).on("click", ".minus", function () {
-        let inputQuantity = $(this).siblings(".number");
-        let currentVal = parseInt(inputQuantity.val()) || 1;
-        let productId = inputQuantity.data("id");
+        const $inputQuantity = $(this).siblings(".number");
+        const currentVal = parseInt($inputQuantity.val()) || 1;
+        const productId = $inputQuantity.data("id");
 
         if (currentVal > 1) {
             $.ajax({
-                url: "/client/carts/minus/" + productId, // Giả sử bạn có endpoint /minus/{id}
+                url: "/client/carts/minus/" + productId,
                 type: "POST",
                 success: function (response) {
                     if (response.status === "success") {
-                        // Cập nhật số lượng trên UI
-                        inputQuantity.val(response.quantity);
+                        $inputQuantity.val(response.quantity);
+                        const $priceElement = $inputQuantity.closest(".rightSide").find(".price");
+                        $priceElement.text(formatVND(response.totalPrice));
 
-                        // Cập nhật giá sản phẩm
-                        let priceElement = inputQuantity.closest(".rightSide").find(".price");
-                        priceElement.text(new Intl.NumberFormat('vi-VN').format(response.totalPrice) + "đ");
-
-                        // Cập nhật tổng tiền
-                        let totalElement = $(".right__content .Total .right__text");
-                        totalElement.text(new Intl.NumberFormat('vi-VN').format(response.price + thue + ship ) + "đ");
-
-                        // Cập nhật tạm tính
-                        let subtotalElement = $(".right__content .Subtotal .right__text");
-                        subtotalElement.text(new Intl.NumberFormat('vi-VN').format(response.price) + "đ");
+                        updateSummary();
+                    } else {
+                        alert("Cập nhật số lượng thất bại!");
                     }
                 },
                 error: function () {
@@ -150,5 +157,24 @@ $(document).ready(function () {
         }
     });
 
+    refreshCheckAllState();
+    updateSummary();
+
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+        const checkedItems = document.querySelectorAll(".cart-check-item:checked");
+        const pairs = [];
+
+        checkedItems.forEach(item => {
+            const parent = item.closest(".left__product--item");
+            if (parent) {
+                const productId = parent.id.replace("item-", "");
+                const qty = parent.querySelector(".number").value; // lấy quantity
+                pairs.push(productId + ":" + qty);
+            }
+        });
+
+
+        document.getElementById("selectedIds").value = pairs.join(",");
+    });
 
 });

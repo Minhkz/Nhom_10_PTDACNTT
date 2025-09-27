@@ -53,34 +53,47 @@
             <div class="address__main--title" style="margin-bottom: 32px">
                 Phương thức vận chuyển
             </div>
-            <div class="address__main--content d-flex justify-content-between align-items-center" style="height: 72px;  border: 1px solid black;  border-radius: 5px; margin-bottom: 24px">
+            <div class="address__main--content d-flex justify-content-between align-items-center"
+                 style="height: 72px; border: 1px solid black; border-radius: 5px; margin-bottom: 24px">
                 <div class="main__content--left d-flex p-4">
-                    <input type="radio" name="shipping" checked="checked" value="" style="width: 24px; height: 24px;"/>
-                    <div class="ms-4">
-                        Miễn phí ship
-                    </div>
+                    <input type="radio" name="shipping" value="0" style="width: 24px; height: 24px;" disabled="disabled"/>
+                    <div class="ms-4">Miễn phí ship</div>
                 </div>
                 <div class="address__main--right me-4">
-
+                    <fmt:formatNumber type="number" value="0" />đ
                 </div>
             </div>
-            <div class="address__main--content d-flex justify-content-between align-items-center" style="height: 72px;  border: 1px solid black;  border-radius: 5px; margin-bottom: 24px">
+
+            <div class="address__main--content d-flex justify-content-between align-items-center"
+                 style="height: 72px; border: 1px solid black; border-radius: 5px; margin-bottom: 24px">
                 <div class="main__content--left d-flex p-4">
-                    <input type="radio" name="shipping" checked="checked" value="" style="width: 24px; height: 24px;"/>
-                    <div class="ms-4">
-                        Ship hỏa tốc
-                    </div>
+                    <input type="radio" name="shipping" value="29000" checked="checked" style="width: 24px; height: 24px;"/>
+                    <div class="ms-4">Tiết kiệm</div>
                 </div>
                 <div class="address__main--right me-4">
-
+                    <fmt:formatNumber type="number" value="29000" />đ
                 </div>
             </div>
+
+            <div class="address__main--content d-flex justify-content-between align-items-center"
+                 style="height: 72px; border: 1px solid black; border-radius: 5px; margin-bottom: 24px">
+                <div class="main__content--left d-flex p-4">
+                    <input type="radio" name="shipping" value="49000" style="width: 24px; height: 24px;"/>
+                    <div class="ms-4">Giao nhanh</div>
+                </div>
+                <div class="address__main--right me-4">
+                    <fmt:formatNumber type="number" value="49000" />đ
+                </div>
+            </div>
+
 
             <div class="d-flex justify-content-end align-items-center mb-5">
                 <form action="/client/payment/address" method="get">
                     <button type="submit" class="btn btn-outline-dark" style="width: 208px; height: 64px; margin-right: 24px">Back</button>
                 </form>
-                <form action="/client/payment" method="get">
+                <form id="shippingForm" action="/client/payment" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="hidden" id="shippingHidden" name="shipping" value=""/>
                     <button type="submit" class="btn btn-dark" style="width: 208px; height: 64px;">Next</button>
                 </form>
 
@@ -95,5 +108,11 @@
 
 <!--js-->
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
+<script>
+    document.getElementById("shippingForm").addEventListener("submit", function () {
+        const selected = document.querySelector("input[name='shipping']:checked");
+        document.getElementById("shippingHidden").value = selected ? selected.value : "";
+    });
+</script>
 </body>
 </html>

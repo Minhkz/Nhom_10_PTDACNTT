@@ -72,7 +72,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "user")
     private List<Address> addresses;
 
     @PrePersist

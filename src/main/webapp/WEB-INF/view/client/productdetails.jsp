@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,9 +140,18 @@
                                 <div class="col-md-6 col-lg-4 col-xl-3 product__item m-2">
                                     <div class="product__item--box">
                                         <div class="box__header d-flex justify-content-end">
-                                            <a href="/admin">
-                                                <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
-                                            </a>
+                                            <button type="button"
+                                                    class="border-0 bg-transparent heart__item"
+                                                    data-id="${product.id}">
+                                                <c:choose>
+                                                    <c:when test="${fn:contains(wishlistId, product.id)}">
+                                                        <img src="${env}/client/images/home/Icon/heart-solid-full.png" alt="logo">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="${env}/client/images/home/Icon/heart.png" alt="logo">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </button>
                                         </div>
                                         <div class="box__img">
                                             <a href="/client/productdetails/${product.id}">

@@ -2,8 +2,12 @@ package com.devpro.controller.client;
 
 import com.devpro.models.Product;
 import com.devpro.models.User;
+import com.devpro.models.Wishlist;
+import com.devpro.models.WishlistItem;
 import com.devpro.repository.CartItemRepository;
 import com.devpro.repository.CartRepository;
+import com.devpro.repository.WishListItemRepository;
+import com.devpro.repository.WishListRepository;
 import com.devpro.service.impl.ProductService;
 import com.devpro.service.impl.UserService;
 import com.devpro.service.specification.ProductSpec;
@@ -14,9 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/client/productdetails")
@@ -34,11 +37,30 @@ public class ProductDetailsController {
     @Autowired
     private CartItemRepository cartItemRepository;
 
+    @Autowired
+    private WishListRepository wishListRepository;
+
+    @Autowired
+    private WishListItemRepository  wishListItemRepository;
+
     @GetMapping("/{id}")
-    public String productDetailsPage(Model model, @PathVariable("id")int id) {
+    public String productDetailsPage(Model model, @PathVariable("id")int id, HttpServletRequest request) {
          Product product= productService.findById(id);
          String category = product.getCategory().getName();
          List<Product> products = productService.findAll(ProductSpec.getCategoryProduct(category));
+         HttpSession session = request.getSession();
+         String email = (String) session.getAttribute("email");
+         User user = this.userService.getUserByEmail(email);
+         Set<Product> wish = new HashSet<>();
+         Set<Integer> wishIds = new HashSet<>();
+         if(user!=null){
+             Wishlist wishlist = this.wishListRepository.findByUser(user);
+             List<WishlistItem> wishlistItems = wishListItemRepository.findByWishlist(wishlist);
+             wish = wishlistItems.stream().map(WishlistItem::getProduct).collect(Collectors.toSet());
+             wishIds = wish.stream().map(Product::getId).collect(Collectors.toSet());
+
+         }
+         model.addAttribute("wishlistId",wishIds);
          model.addAttribute("productd",product);
          model.addAttribute("products",products);
          return "client/productdetails";
