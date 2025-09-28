@@ -30,7 +30,7 @@ public class Role implements Serializable {
     private String description;
 
     public enum RoleType {
-        USER, ADMIN
+        USER, ADMIN, STAFF
     }
 
     @PrePersist

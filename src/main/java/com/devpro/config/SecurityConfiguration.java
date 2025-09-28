@@ -69,9 +69,10 @@ public class SecurityConfiguration {
                         .permitAll()
 
                         .requestMatchers("/client/homes/**", "/products/**", "/signup/**", "/admin/images/**",
-                                "/client/**", "/css/**", "/js/**", "/images/**", "/")
+                                "/client/**", "/css/**", "/js/**", "/images/**", "/", "/admin/css/**", "/admin/assets/**"
+                        , "/admin/js/**")
                         .permitAll()
-
+                        .requestMatchers("/admin/orders/**", "/admin").hasRole("STAFF")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated())
@@ -100,7 +101,7 @@ public class SecurityConfiguration {
                         .failureUrl("/client/homes/signin?error")
                         .successHandler(customSuccessHandler())
                         .permitAll());
-                //.exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+                http.exceptionHandling(ex -> ex.accessDeniedPage("/error/403"));
 
         return http.build();
     }

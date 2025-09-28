@@ -5,7 +5,7 @@ USE iphoneshop;
 -- 1. Roles
 CREATE TABLE roles(
 	id 				INT AUTO_INCREMENT PRIMARY KEY,
-    `name`			ENUM("USER","ADMIN") DEFAULT "USER",
+    `name`			ENUM("USER","ADMIN","STAFF") DEFAULT "USER",
     `description` 	TEXT
 );
 
