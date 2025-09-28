@@ -82,6 +82,9 @@ CREATE TABLE orders(
     address_id		INT UNIQUE,
     total_product   INT,
     `status`		NVARCHAR(50),
+    payment_ref		NVARCHAR(50),
+    payment_status	NVARCHAR(50),
+    payment_method	NVARCHAR(50),
     FOREIGN KEY(address_id) REFERENCES address(id) ON DELETE SET NULL,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE SET NULL
 );

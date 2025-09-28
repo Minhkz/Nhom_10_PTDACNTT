@@ -32,6 +32,18 @@ public class Order implements Serializable {
     @Column
     private String status;
 
+    @Column(name = "payment_ref", length = 50)
+    @NonNull
+    private String paymentRef;
+
+    @Column(name = "payment_status", length = 50)
+    @NonNull
+    private String paymentStatus;
+
+    @Column(name = "payment_method", length = 50)
+    @NonNull
+    private String paymentMethod;
+
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;

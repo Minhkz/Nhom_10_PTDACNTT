@@ -6,6 +6,7 @@ import com.devpro.models.User;
 import com.devpro.models.Wishlist;
 import com.devpro.repository.WishListItemRepository;
 import com.devpro.repository.WishListRepository;
+import com.devpro.service.impl.EmailService;
 import com.devpro.service.impl.ProductService;
 import com.devpro.service.impl.RoleService;
 import com.devpro.service.impl.UserService;
@@ -45,6 +46,9 @@ public class HomeController {
 
     @Autowired
     private WishListItemRepository  wishListItemRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping
     public String homePage(Model model, HttpServletRequest request) {

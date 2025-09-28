@@ -1,6 +1,7 @@
 package com.devpro.config;
 
 import com.devpro.models.User;
+import com.devpro.service.impl.EmailService;
 import com.devpro.service.impl.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +25,10 @@ import java.util.Map;
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
+
 
     protected String determineTargetUrl(final Authentication authentication) {
 
@@ -61,6 +66,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                 sum = user.getCart().getSum();
             }
             session.setAttribute("sum", sum);
+            emailService.sendLoginSuccessEmail(user.getEmail(), user.getFullName());
         }else {
             user = userService.getUserByEmail(username);
             if (user != null) {
@@ -73,6 +79,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                     sum = user.getCart().getSum();
                 }
                 session.setAttribute("sum", sum);
+                emailService.sendLoginSuccessEmail(user.getEmail(), user.getFullName());
             }
         }
 
@@ -86,7 +93,6 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException, ServletException {
 
         String targetUrl = determineTargetUrl(authentication);
-
         if (response.isCommitted()) {
 
             return;

@@ -14,6 +14,7 @@ INSERT INTO `categories` (`trade_mark`) VALUES
 -- 2. ROLES
 INSERT INTO `roles` (`name`, `description`) VALUES
     ('ADMIN', 'Quản trị hệ thống, có toàn quyền'),
+    ('STAFF', 'Quản lý đơn hàng'),
     ('USER', 'Người dùng thông thường');
 
 -- 3. SPECIFICATIONS

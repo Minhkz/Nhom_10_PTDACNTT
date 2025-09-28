@@ -116,14 +116,14 @@
                         <form method="POST" action="#">
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="payment" id="live" checked="checked" value="COD">
-                                    <label class="form-check-label" for="live">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="COD" checked="checked" value="COD">
+                                    <label class="form-check-label" for="COD">
                                         Thanh toán khi nhận hàng
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="payment" id="vnpay">
-                                    <label class="form-check-label" for="vnpay">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="BANKING" value="BANKING">
+                                    <label class="form-check-label" for="BANKING">
                                         Thanh toán bằng ví VNpay
                                     </label>
                                 </div>
@@ -140,11 +140,6 @@
                                         style="width: 208px; height: 64px;">
                                     Thanh toán
                                 </button>
-                                <a href="/client/payment/checkout/success"
-                                   class="btn btn-outline-dark d-flex justify-content-center align-items-center"
-                                   style="width: 208px; height: 64px; margin-right: 24px">
-                                    Pay
-                                </a>
                             </div>
                         </form>
                     </div>
