@@ -333,5 +333,9 @@
 <jsp:include page="/WEB-INF/view/client/layout/js.jsp"></jsp:include>
 <script src="${env}/client/js/common.js"></script>
 <script src="${env}/client/js/home.js"></script>
+
+<!-- Elfsight AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" defer></script>
+<div class="elfsight-app-3d71aacc-c131-4512-927d-478360d585b6" data-elfsight-app-lazy></div>
 </body>
 </html>

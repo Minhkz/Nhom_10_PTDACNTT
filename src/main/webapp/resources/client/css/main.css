@@ -253,7 +253,7 @@
 #scrollTopBtn {
     display: none; /* Ẩn mặc định */
     position: fixed;
-    bottom: 20px;
+    bottom: 90px;
     right: 30px;
     z-index: 99;
     font-size: 18px;
@@ -271,4 +271,7 @@
     background-color: #555;
     transform: translateY(-3px);
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+.elfsight-app-3d71aacc-c131-4512-927d-478360d585b6 {
+    display: none;
 }
