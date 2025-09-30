@@ -1,9 +1,8 @@
 package com.devpro.controller.client;
 
 import com.devpro.dto.user.UserDto;
-import com.devpro.models.Product;
-import com.devpro.models.User;
-import com.devpro.models.Wishlist;
+import com.devpro.models.*;
+import com.devpro.repository.OrderRepository;
 import com.devpro.repository.WishListItemRepository;
 import com.devpro.repository.WishListRepository;
 import com.devpro.service.impl.EmailService;
@@ -49,6 +48,9 @@ public class HomeController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @GetMapping
     public String homePage(Model model, HttpServletRequest request) {
@@ -118,5 +120,32 @@ public class HomeController {
         Map<String, Object> response = new HashMap<>();
         response.put("status", added?"added":"removed");
         return response;
+    }
+
+    @GetMapping("/order-history")
+    public String orderHistory(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String email = (String) session.getAttribute("email");
+        User user = userService.getUserByEmail(email);
+        List<Order>  orders = user.getOrders();
+        model.addAttribute("orders",orders);
+        return  "client/order_history";
+    }
+
+    @GetMapping("/order-history/{id}")
+    public String orderHistoryView(Model model, @PathVariable("id") int id) {
+        Order order = this.orderRepository.findById(id).get();
+        List<OrderProduct> orderProducts = order.getOrderProducts();
+        model.addAttribute("order",order);
+        model.addAttribute("orderProducts",orderProducts);
+        return "client/order_details";
+    }
+
+    @GetMapping("/order-history/cancel/{id}")
+    public String cancelOrderHistory(Model model, @PathVariable("id") int id) {
+        Order order = this.orderRepository.findById(id).get();
+        order.setStatus("CANCELLED");
+        this.orderRepository.save(order);
+        return "redirect:/client/homes/order-history";
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "address")
@@ -47,6 +48,6 @@ public class Address implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "address")
-    private Order order;
+    @OneToMany(mappedBy = "address")
+    private List<Order> orders;
 }

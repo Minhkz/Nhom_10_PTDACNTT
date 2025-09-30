@@ -12,9 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +34,12 @@ public class ProductService implements IProductService {
 
     @Autowired
     private CartItemRepository cartItemRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private OrderProductRepository orderProductRepository;
 
     @Override
     public Product save(Product product) {
@@ -233,4 +237,53 @@ public class ProductService implements IProductService {
         }
         return false;
     }
+
+    public void handlePlaceOrder(User user, Address address, HttpSession session) {
+        List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("checkoutProducts");
+
+        // 1. Tạo Order
+        Order order = new Order();
+        order.setUser(user);
+        order.setAddress(address);
+        order.setTotalPrice((Double) session.getAttribute("total"));
+        order.setQuantity(cartProducts.size());
+        order.setStatus("PENDING");
+
+        // Lưu order trước để có ID
+        order = orderRepository.save(order);
+
+        // Map quantity trong giỏ hàng
+        Map<Integer, Integer> map = (Map<Integer, Integer>) session.getAttribute("checkoutQuantities");
+
+        Cart cart = cartRepository.findByUser(user);
+
+        // 2. Tạo OrderProduct cho từng sản phẩm
+        for (CartProduct cartProduct : cartProducts) {
+            Product product = cartProduct.getProduct();
+
+            OrderProductKey key = new OrderProductKey(order.getId(), product.getId());
+
+            OrderProduct orderProduct = new OrderProduct();
+            orderProduct.setOrderProductKey(key);
+            orderProduct.setOrder(order);
+            orderProduct.setProduct(product);
+            orderProduct.setQuantity(map.get(product.getId()));
+            orderProduct.setPrice(cartProduct.getPrice());
+
+            orderProductRepository.save(orderProduct);
+
+            // Xoá khỏi giỏ hàng
+            cartItemRepository.deleteById(new CartProductKey(product.getId(), cart.getId()));
+        }
+
+        // 3. Cập nhật lại sum của giỏ hàng
+        int s = (Integer) session.getAttribute("sum") - cartProducts.size();
+        cart.setSum(s);
+        this.cartRepository.save(cart);
+        session.setAttribute("sum", s);
+        session.removeAttribute("checkoutProducts");
+        session.removeAttribute("checkoutQuantities");
+        session.removeAttribute("total");
+    }
+
 }

@@ -96,7 +96,7 @@
 
                 <div class="d-flex justify-content-end align-items-center mb-5">
                     <!-- Nút Back dùng link -->
-                    <a href="/client/carts" class="btn btn-outline-dark d-flex justify-content-center align-items-center"
+                    <a href="${returnUrl != null ? returnUrl : '/client/carts'}" class="btn btn-outline-dark d-flex justify-content-center align-items-center"
                        style="width: 208px; height: 64px; margin-right: 24px">Back</a>
 
                     <!-- CSRF token -->

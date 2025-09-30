@@ -54,7 +54,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-        // get email
+
         String username = authentication.getName();
         User user = userService.getUserByUsername(username);
         if (user != null) {
@@ -62,6 +62,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             session.setAttribute("avatar", user.getAvatar());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("id", user.getId());
+            session.setAttribute("role", user.getRole().getName().toString().trim());
             int sum = 0;
             if (user.getCart() != null && user.getCart().getSum() != null) {
                 sum = user.getCart().getSum();
@@ -75,6 +76,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                 session.setAttribute("avatar", user.getAvatar());
                 session.setAttribute("email", user.getEmail());
                 session.setAttribute("id", user.getId());
+                session.setAttribute("role", user.getRole().getName().toString().trim());
                 int sum = 0;
                 if (user.getCart() != null && user.getCart().getSum() != null) {
                     sum = user.getCart().getSum();

@@ -51,6 +51,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 user.setEmail(email);
                 user.setFullName(fullName);
                 user.setProvider("GITHUB");
+                user.setAvatar("default-github.png");
                 user.setRole(userRole);
                 this.userService.save(user);
             }
@@ -71,6 +72,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 user.setEmail(email);
                 user.setFullName(fullName);
                 user.setProvider("GOOGLE");
+                user.setAvatar("default-google.png");
                 user.setRole(userRole);
                 this.userService.save(user);
             }

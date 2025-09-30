@@ -57,13 +57,29 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li class="d-flex align-items-center flex-column" style="min-width: 210px;">
-                                <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
-                                     src="${env}/admin/images/user/${sessionScope.avatar}" />
+                                <c:choose>
+                                    <c:when test="${sessionScope.role eq 'ADMIN'}">
+                                    <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                         src="${env}/admin/images/user/${sessionScope.avatar}" />
+                                    </c:when>
+
+                                    <c:when test="${sessionScope.role eq 'STAFF'}">
+                                        <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                             src="${env}/admin/images/user/${sessionScope.avatar}" />
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                             src="${env}/client/images/avatar/${sessionScope.avatar}" />
+                                    </c:otherwise>
+
+                                </c:choose>
+
                                 <div class="text-center my-3">
                                     <c:out value="${sessionScope.fullName}" />
                                 </div>
                             </li>
-                            <li><a class="dropdown-item" href="#">Lịch sử mua hàng</a></li>
+                            <li><a class="dropdown-item" href="/client/homes/order-history">Lịch sử mua hàng</a></li>
                             <li>
                                 <form action="/logout" method="post">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

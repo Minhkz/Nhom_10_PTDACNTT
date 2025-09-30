@@ -26,12 +26,12 @@ public class OrderProduct implements Serializable {
 
     @ManyToOne
     @MapsId("orderId")
-    @JoinColumn(name = "orderId")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne
     @MapsId("productId")
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "product_id")
     private Product product;
 
 }

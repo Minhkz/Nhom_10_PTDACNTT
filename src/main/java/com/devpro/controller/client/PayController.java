@@ -4,6 +4,7 @@ import com.devpro.models.*;
 import com.devpro.repository.AddressRepository;
 import com.devpro.repository.CartItemRepository;
 import com.devpro.repository.CartRepository;
+import com.devpro.service.impl.ProductService;
 import com.devpro.service.impl.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.devpro.models.User_.cart;
+import static com.devpro.models.User_.id;
 
 @Controller
 @RequestMapping("/client/payment")
@@ -37,6 +39,9 @@ public class PayController {
     @Autowired
     private CartItemRepository cartItemRepository;
 
+    @Autowired
+    private ProductService  productService;
+
     @PostMapping
     public String payPage(@RequestParam("shipping") String typeShip, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
@@ -47,7 +52,9 @@ public class PayController {
         for (CartProduct cartProduct : cartProducts) {
             subTotal += cartProduct.getProduct().getPrice()*cartProduct.getQuantity();
         }
+
         Double total = subTotal + thue + Double.parseDouble(typeShip);
+        session.setAttribute("total", total);
         model.addAttribute("products", cartProducts);
         model.addAttribute("typeShip", Integer.parseInt(typeShip));
         model.addAttribute("address", address);
@@ -61,7 +68,8 @@ public class PayController {
     @PostMapping("/address")
     public String addressPage(Model model,
                               HttpServletRequest request,
-                              @RequestParam("selectedIds") String selectedIds) {
+                              @RequestParam("selectedIds") String selectedIds,
+                              @RequestParam(value = "returnUrl", required = false) String urlBefore) {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
 
@@ -98,7 +106,7 @@ public class PayController {
 
             model.addAttribute("addresses", addresses);
         }
-
+        model.addAttribute("returnUrl", urlBefore);
         return "client/checkout/addresses/address";
     }
     @GetMapping("/address")
@@ -183,6 +191,21 @@ public class PayController {
     public  String checkoutSuccessPage()
     {
         return "client/checkout/checkoutsuccess";
+    }
+
+
+    @PostMapping("/checkout")
+    public String checkout(@RequestParam("paymentMethod") String paymentType, HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        User currentUser = new User();
+        int id = (int) session.getAttribute("id");
+        currentUser.setId(id);
+        Address address = this.addressRepository.findById ((Integer) session.getAttribute("address")).get();
+        if (paymentType.equals("COD")) {
+            this.productService.handlePlaceOrder(currentUser, address, session);
+        }
+        return "redirect:/client/payment/checkout/success";
     }
 
 }

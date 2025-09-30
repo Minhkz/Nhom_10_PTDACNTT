@@ -79,7 +79,7 @@ CREATE TABLE orders(
 	id 				INT AUTO_INCREMENT PRIMARY KEY,
     user_id 		INT DEFAULT NULL,
     total_price		DOUBLE,
-    address_id		INT UNIQUE,
+    address_id		INT,
     total_product   INT,
     `status`		NVARCHAR(50),
     payment_ref		NVARCHAR(50),

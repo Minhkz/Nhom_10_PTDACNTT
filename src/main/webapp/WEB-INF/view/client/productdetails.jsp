@@ -67,7 +67,11 @@
                 <div class="infos__btn d-flex justify-content-between m-2">
                     <button type="button" class="btn btn-outline-dark nut" id="showToastWish" data-id="${productd.id}">Thêm vào yêu thích</button>
                     <button type="button" class="btn btn-outline-dark nut" id="showToastCart" data-id="${productd.id}">Thêm vào giỏ hàng</button>
-                    <a href="/client/payment/address" class="btn btn-outline-dark nut d-flex justify-content-center align-items-center">Mua ngay</a>
+                    <form id="checkoutForm" action="/client/payment/address?returnUrl=/client/productdetails/${productd.id}" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <input type="hidden" id="selectedIds" name="selectedIds" value=""/>
+                        <button type="submit" class="btn btn-outline-dark nut">Mua ngay</button>
+                    </form>
                 </div>
                 <div class="infos__icons m-2">
                     <img src="${env}/client/images/productsDetailsPage/Icons.png" alt="logo">

@@ -117,4 +117,13 @@ $(document).ready(function () {
             }
         });
     });
+
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+        const productInput = document.querySelector(".number");
+        const productId = productInput.dataset.id;
+        const qty = productInput.value;
+        const pairs = [];
+        pairs.push(productId + ":" + qty);
+        document.getElementById("selectedIds").value = pairs.join(",");
+    });
 });

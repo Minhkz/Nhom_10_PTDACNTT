@@ -1,5 +1,6 @@
 package com.devpro.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,10 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 public class OrderProductKey implements Serializable {
+    @Column(name = "order_id")
     private Integer orderId;
+
+    @Column(name = "product_id")
     private Integer productId;
 
     public OrderProductKey(Integer orderId, Integer productId) {

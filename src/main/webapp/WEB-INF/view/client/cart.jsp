@@ -134,13 +134,12 @@
                                 </p>
                             </div>
                         </div>
-                        <form id="checkoutForm" method="post" action="/client/payment/address">
+                        <form id="checkoutForm" method="post" action="/client/payment/address?returnUrl=/client/carts">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <input type="hidden" id="selectedIds" name="selectedIds" value=""/>
                             <button type="submit" class="btn btn-outline-dark but1">Thanh toán</button>
                         </form>
 
-                        <p class="mt-3">Tổng sản phẩm: <span id="count-item">${totalItem}</span></p>
                     </div>
                 </div>
             </div>

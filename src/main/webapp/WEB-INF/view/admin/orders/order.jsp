@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,21 @@
     <title>Order</title>
     <!--css-->
     <jsp:include page="/WEB-INF/view/admin/layout/css.jsp"></jsp:include>
-
+    <style>
+        /* Header */
+        .header__search{
+            width: 372px;
+            height: 56px;
+            background-color: var(--bgr-search);
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+        .header__search--input{
+            border: 0;
+            outline: none;
+            background-color: transparent;
+        }
+    </style>
 </head>
 <body class="sb-nav-fixed">
 <!--header-->
@@ -30,7 +44,7 @@
                 </ol>
                 <div class="row">
                     <div class="col-12 mx-auto">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
                             <h3>Table orders</h3>
                         </div>
 
@@ -39,18 +53,57 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Email</th>
-                                <th>Username</th>
-                                <th>Full Name</th>
-                                <th>Role</th>
+                                <th>Tổng sản phẩm</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-
+                                <c:forEach var="order" items="${orders}">
+                                    <tr>
+                                        <td>${order.id}</td>
+                                        <td>${order.quantity}</td>
+                                        <td>${order.totalPrice}đ</td>
+                                        <td>${order.status}</td>
+                                        <td>
+                                            <a href="/admin/orders/views/${order.id}" class="btn btn-success">View</a>
+                                            <a href="/admin/orders/updates/${order.id}"
+                                               class="btn btn-warning  mx-2">Update</a>
+                                            <a href="/admin/orders/deletes/${order.id}"
+                                               class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
-                        </table>
 
+                        </table>
+                        <c:if test="${totalPages > 0}">
+                            <div class="paging d-flex justify-content-center align-items-center ">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination ">
+                                        <li class="page-item">
+                                            <a class="${1 eq currentPage ? 'd-none' : 'page-link'}" href="/admin/orders?page=${currentPage -1}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <c:forEach begin="0" end="${totalPages -1}" varStatus="loop">
+                                            <li class="page-item">
+                                                <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
+                                                   href="/admin/orders?page=${loop.index + 1}">
+                                                        ${loop.index + 1}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="page-item">
+                                            <a class="${currentPage eq totalPages? 'd-none' : 'page-link'}" href="/admin/orders?page=${currentPage +1}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
 

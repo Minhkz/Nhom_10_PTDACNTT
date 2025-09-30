@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -44,7 +46,9 @@ public class Order implements Serializable {
     @NonNull
     private String paymentMethod;
 
-    @OneToOne
+
+
+    @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -53,4 +57,5 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "order")
     private List<Payment> payments;
+
 }

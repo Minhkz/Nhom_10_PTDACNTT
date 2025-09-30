@@ -113,7 +113,7 @@
                     <!-- Payment -->
                     <div class="col-lg-4">
                         <h5 class="mb-3">Hình thức thanh toán</h5>
-                        <form method="POST" action="#">
+                        <form method="POST" action="/client/payment/checkout">
                             <div class="mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="paymentMethod" id="COD" checked="checked" value="COD">
