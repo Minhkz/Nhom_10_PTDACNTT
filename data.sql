@@ -1,10 +1,10 @@
-CREATE DATABASE IF NOT EXISTS iphoneshop;
+CREATE DATABASE IF NOT EXISTS iphoneshop10;
 
-USE iphoneshop;
+USE iphoneshop10;
 
 -- HERE INSERT DATA 
-CREATE DATABASE IF NOT EXISTS iphoneshop;
-USE iphoneshop;
+CREATE DATABASE IF NOT EXISTS iphoneshop10;
+USE iphoneshop10;
 
 -- 1. CATEGORIES
 INSERT INTO `categories` (`trade_mark`) VALUES

@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS iphoneshop;
-CREATE DATABASE iphoneshop;
-USE iphoneshop;
+DROP DATABASE IF EXISTS iphoneshop10;
+CREATE DATABASE iphoneshop10;
+USE iphoneshop10;
 
 -- 1. Roles
 CREATE TABLE roles(
@@ -144,7 +144,7 @@ CREATE TABLE reviews (
   rating 			TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
   title 			VARCHAR(255) NOT NULL,
   body 				TEXT NOT NULL,
-  is_approved 		BIT(1) DEFAULT 0,
+  is_approved 		TINYINT(1) DEFAULT 0,
   created_at 		DATETIME DEFAULT NOW(),
   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL

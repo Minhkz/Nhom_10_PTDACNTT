@@ -115,22 +115,35 @@
             </div>
         </div>
     </div>
-    <div class="Reviews">
-        <div class="container">
-            <div class="top">
-                <h1 class="m-2">Đánh giá sản phẩm</h1>
-                <img src="${env}/client/images/productsDetailsPage/Overall Rating.png">
-                <div class="input_comment border m-2" style="height: 64px">
-                    <form action="" method="post">
-                        <input type="text" name="comment" id="comment"  placeholder="Hãy để lại bình luận cho sản phẩm">
-                    </form>
+    <div class="container py-5">
+        <h1>Đánh giá sản phẩm</h1>
+        <br>
+        <!-- Form nhập bình luận -->
+        <div class="mb-4">
+            <textarea class="form-control" placeholder="Viết bình luận..." rows="3"></textarea>
+            <button class="btn btn-primary mt-2">Gửi đánh giá</button>
+        </div>
+
+        <!-- Danh sách đánh giá -->
+        <div class="review-card">
+            <div class="d-flex align-items-center mb-2">
+                <img src="https://i.pravatar.cc/40?img=1" class="rounded-circle me-2" width="40" height="40">
+                <div>
+                    <div class="review-user">Nhật Minh</div>
+                    <div class="review-time">1 giờ trước</div>
                 </div>
             </div>
-            <div class="Review">
-                <img src="${env}/client/images/productsDetailsPage/Reviews.png" alt="logo">
+            <div class="review-body">
+                Mình hơi lo lắng khi mua điện thoại đã qua sử dụng trên Amazon, nhưng không hề thất vọng...
             </div>
-
         </div>
+
+
+        <!-- Nút xem thêm -->
+        <div class="text-center mt-3">
+            <button class="btn btn-outline-secondary">Xem thêm</button>
+        </div>
+
     </div>
     <div class="container">
         <div class="discounts">
